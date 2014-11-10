@@ -54,30 +54,41 @@ namespace _2D_Projekt
                     playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - 0.1f);
                     jumpCount++;
                 }
-                else
+                else //Fall
                 {
                     imSprungTest = true;
+
                 }
-                // Fall
-                if (imSprungTest == true && jumpCount > 0)
-                {
-                    playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + 0.1f);
-                    jumpCount--;
-                }
-                else
-                {
-                    imSprungTest = false;
-                }
+                
+
+            }//Frühzeiter Abbruch des Sprungs
+            if(imSprungTest == false && Keyboard.IsKeyPressed(Keyboard.Key.Space) == false)
+            {
+                imSprungTest = true;
             }
-            //Schwerkraft  
+
+
+            if (imSprungTest == true && jumpCount > 0)
+            {
+                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + 0.1f);
+                jumpCount--;
+            }
             else
             {
-                if (playerPosition.Y < 550)
-                {
-                    playerPosition.Y = playerPosition.Y + 0.1f;
-                    jumpCount = 0;
-                }
+                imSprungTest = false;
             }
+
+
+
+            //Schwerkraft  
+            //else
+            //{
+            //    if (playerPosition.Y < 550)
+            //    {
+            //        playerPosition.Y = playerPosition.Y + 0.1f;
+            //        jumpCount--;
+            //    }
+            //}
 
 
 
@@ -96,3 +107,6 @@ namespace _2D_Projekt
 
     }
 }
+
+
+
