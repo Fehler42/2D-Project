@@ -75,7 +75,7 @@ namespace _2D_Projekt
                 if (playerPosition.Y < 550)
                 {
                     playerPosition.Y = playerPosition.Y + 0.1f;
-                    jumpCount = 0;
+                    jumpCount --;
                 }
             }
 
