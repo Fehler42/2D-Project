@@ -15,6 +15,8 @@ namespace _2D_Projekt
         public Vector2f playerPosition;
         int jumpCount = 0;
         bool imSprungTest = false;
+        float gravity = 0.1f;
+        bool gravityTester = false;
         
         // Constructor
         public Player()
@@ -45,39 +47,62 @@ namespace _2D_Projekt
             {
                 playerPosition = new Vector2f(playerPosition.X - 0.1f, playerPosition.Y);
             }
+            //if (Keyboard.IsKeyPressed(Keyboard.Key.LShift))
+            //{
+            //    gravity = gravity * -1;
+            //}
             // Springen 
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
             {
                 //Absprung
                 if (imSprungTest == false && jumpCount < 800)
                 {
-                    playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - 0.1f);
+                    playerPosition = new Vector2f(playerPosition.X, playerPosition.Y -  gravity);
                     jumpCount++;
                 }
-                else
+                else //Fall
                 {
                     imSprungTest = true;
+
                 }
-                // Fall
-                if (imSprungTest == true && jumpCount > 0)
-                {
-                    playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + 0.1f);
-                    jumpCount--;
-                }
-                else
-                {
-                    imSprungTest = false;
-                }
+                
+
+            }//Frühzeiter Abbruch des Sprungs
+            if(imSprungTest == false && Keyboard.IsKeyPressed(Keyboard.Key.Space) == false)
+            {
+                imSprungTest = true;
             }
-            //Schwerkraft  
+
+
+            if (imSprungTest == true && jumpCount > 0)
+            {
+                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + gravity);
+                jumpCount--;
+            }
             else
             {
+
                 if (playerPosition.Y < 550)
                 {
                     playerPosition.Y = playerPosition.Y + 0.1f;
                     jumpCount --;
                 }
+
+                imSprungTest = false;
+
             }
+
+
+
+            //Schwerkraft  
+            //else
+            //{
+            //    if (playerPosition.Y < 550)
+            //    {
+            //        playerPosition.Y = playerPosition.Y + 0.1f;
+            //        jumpCount--;
+            //    }
+            //}
 
 
 
@@ -96,3 +121,6 @@ namespace _2D_Projekt
 
     }
 }
+
+
+
