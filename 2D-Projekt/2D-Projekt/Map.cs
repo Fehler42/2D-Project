@@ -17,11 +17,11 @@ namespace _2D_Projekt
         {
             if (tileKind[i, j] == 0)
             {
-                return false;
+                return true;
             }
             else
             {
-                return true;
+                return false;
             }
         }
         public Map()

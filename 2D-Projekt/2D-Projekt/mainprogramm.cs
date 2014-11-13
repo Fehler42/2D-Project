@@ -53,7 +53,7 @@ namespace _2D_Projekt
 
         static void update()
         {
-            player.move();
+            player.move(map);
         }
 
         // Aktualisieren der Sprites im Fenster
@@ -65,25 +65,17 @@ namespace _2D_Projekt
             win.Display();
             
         }
-        // erstellt einen Vektor der in der X Koordinate den Wert für einen Vector der breite hat und in der Y Koordinate  einen Wert für die Höhe 
-        static Vector2f getVectors(float Object1width, float Object1height)
-        {
-            return new Vector2f (Object1width, Object1height);
-        }
+        // Kollisionsabfrage über Rechtecke
+        static bool collision (FloatRect Objekt1, FloatRect Objekt2){
 
-
-        static bool collision (Vector2f Object1Position, Vector2f Object1Vector , Vector2f Object2Position, Vector2f Object2Vector){
-
-            Vector2f positionDifference = positionDifference = new Vector2f(Object2Position.X - Object1Position.X, Object2Position.Y - Object1Position.Y); 
-
-            if (Object1Vector.X - positionDifference.X > 1 || Object1Vector.Y - positionDifference.Y > 1)
-            {
-                return false;
-            }
-            else
+            if (Objekt1.Intersects(Objekt2))
             {
                 return true;
-            }    
+            }
+            else{
+                return false ;
+            }
+    
     }
         
 
