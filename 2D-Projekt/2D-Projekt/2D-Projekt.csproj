@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Map.cs" />
+    <Compile Include="Tile.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="mainprogramm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,6 +76,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="openal32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pictures\free.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pictures\ground.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="pictures\player.png">

@@ -33,9 +33,11 @@ namespace _2D_Projekt
             }
         }
         static Player player;
+        static Map map;
         static void initialize()
         {
             player = new Player();
+            map = new Map();
 
         }
         static void win_Closed(object sender, EventArgs e)
@@ -58,10 +60,32 @@ namespace _2D_Projekt
 
         static void draw(RenderWindow win)
         {
-            win.Clear(new Color());
+            map.draw(win);
             player.draw(win);
             win.Display();
+            
         }
+        // erstellt einen Vektor der in der X Koordinate den Wert für einen Vector der breite hat und in der Y Koordinate  einen Wert für die Höhe 
+        static Vector2f getVectors(float Object1width, float Object1height)
+        {
+            return new Vector2f (Object1width, Object1height);
+        }
+
+
+        static bool collision (Vector2f Object1Position, Vector2f Object1Vector , Vector2f Object2Position, Vector2f Object2Vector){
+
+            Vector2f positionDifference = positionDifference = new Vector2f(Object2Position.X - Object1Position.X, Object2Position.Y - Object1Position.Y); 
+
+            if (Object1Vector.X - positionDifference.X > 1 || Object1Vector.Y - positionDifference.Y > 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }    
+    }
+        
 
     }
 }

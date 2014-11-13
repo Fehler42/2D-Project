@@ -15,8 +15,8 @@ namespace _2D_Projekt
         public Vector2f playerPosition;
         int jumpCount = 0;
         bool imSprungTest = false;
-        float gravity = 0.1f;
-        bool gravityTester = false;
+      //  float gravity = 0.1f;
+      //  bool gravityTester = false;
         
         // Constructor
         public Player()
@@ -25,6 +25,7 @@ namespace _2D_Projekt
             playerSprite = new Sprite(playerTexture);
             playerPosition = new Vector2f(0, 550);
             playerSprite.Position = playerPosition;
+            playerSprite.Scale = new Vector2f(0.5f, 0.5f);
 
         }
 
@@ -57,7 +58,7 @@ namespace _2D_Projekt
                 //Absprung
                 if (imSprungTest == false && jumpCount < 800)
                 {
-                    playerPosition = new Vector2f(playerPosition.X, playerPosition.Y -  gravity);
+                    playerPosition = new Vector2f(playerPosition.X, playerPosition.Y -  0.01f);
                     jumpCount++;
                 }
                 else //Fall
@@ -76,7 +77,7 @@ namespace _2D_Projekt
 
             if (imSprungTest == true && jumpCount > 0)
             {
-                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + gravity);
+                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + 0.01f);
                 jumpCount--;
             }
             else
