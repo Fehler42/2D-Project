@@ -14,11 +14,8 @@ namespace _2D_Projekt
         Sprite playerSprite;
         public Vector2f playerPosition;
         FloatRect playerRect;
-        float speed = 0.1f;
-      //  float gravity = 0.1f;
-      //  bool gravityTester = false;
-        //  int jumpCount = 0;
-        // bool imSprungTest = false;
+        float speed = 3;
+
         
         // Constructor
         public Player()
@@ -38,7 +35,7 @@ namespace _2D_Projekt
         }
 
         // Bewegen der Figur
-        public void move(Map map)
+        public void update(Map map)
         {
             // Vorbereitung Kollisionsabfrage
             playerRect = new FloatRect(playerPosition.X,playerPosition.Y, playerSprite.Texture.Size.X, playerSprite.Texture.Size.Y);
@@ -75,11 +72,9 @@ namespace _2D_Projekt
                 playerPosition = new Vector2f(playerPosition.X - speed, playerPosition.Y);
             }
 
-
-
-
-
+            // Projektile mit wasd abfeuern 
             playerSprite.Position = playerPosition;
+
         }
 
         public Vector2f getPosition()
@@ -105,6 +100,12 @@ namespace _2D_Projekt
 }
 
 
+
+
+//  float gravity = 0.1f;
+//  bool gravityTester = false;
+//  int jumpCount = 0;
+// bool imSprungTest = false;
 
 //// Bewegung nach rechts
 //if (Keyboard.IsKeyPressed(Keyboard.Key.Right))

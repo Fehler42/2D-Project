@@ -15,7 +15,7 @@ namespace _2D_Projekt
         {
             // Erzeuge ein neues Fenster
             RenderWindow win = new RenderWindow(new VideoMode(800, 600), "Mein erstes Fenster");
-
+            win.SetFramerateLimit(45);
             // Achte darauf, ob Fenster geschlossen wird
             win.Closed += win_Closed;
 
@@ -34,10 +34,14 @@ namespace _2D_Projekt
         }
         static Player player;
         static Map map;
+        static List<Projektile> liste;
+        static Projektile schuss;
         static void initialize()
         {
             player = new Player();
             map = new Map();
+            liste = new List<Projektile>();
+            schuss = new Projektile(player.getPosition());
 
         }
         static void win_Closed(object sender, EventArgs e)
@@ -53,7 +57,28 @@ namespace _2D_Projekt
 
         static void update()
         {
-            player.move(map);
+           player.update(map);
+
+
+           if (schuss.RangeCounter < (int) schuss.getRange())
+           {
+               schuss.update();
+               schuss.RangeCounter ++;
+           }
+           else
+           {
+               schuss = new Projektile(player.getPosition());
+           }
+          
+           
+           if (liste.Count != 0)
+           {
+               for (int i = 0; i <= liste.Count -1; i++)
+               {
+                   liste.ElementAt(i).update();
+               }
+           }
+
         }
 
         // Aktualisieren der Sprites im Fenster
@@ -62,8 +87,19 @@ namespace _2D_Projekt
         {
             map.draw(win);
             player.draw(win);
+            if (schuss.getSprite() != null)
+            {
+                schuss.draw(win);
+            }
             win.Display();
             
+            if (liste.Count != 0)
+            {
+                for (int i = 0; i <= liste.Count -1; i++)
+                {
+                    liste.ElementAt(i).draw(win);
+                }
+            }
         }
         // Kollisionsabfrage über Rechtecke
         static bool collision (FloatRect Objekt1, FloatRect Objekt2){
