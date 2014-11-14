@@ -10,9 +10,13 @@ namespace _2D_Projekt
 {
     class FollowerE
     {
+        // Variablen
         Sprite enemySprite = new Sprite();
         Vector2f position;
         FloatRect EnemyRect;
+
+
+        // Constructor
         public FollowerE()
         {
             Texture playerTexture = new Texture("pictures/follower.png");
@@ -22,11 +26,13 @@ namespace _2D_Projekt
             enemySprite.Scale = new Vector2f(0.5f, 0.5f);
         }
 
+        // draw
         public void draw(RenderWindow win)
         {
             win.Draw(enemySprite);
         }
 
+        // calculates next step to player (ignores walls)
         public void update(Vector2f destination)
         {
             float n =(float) Math.Sqrt((destination.X- position.X) *(destination.X- position.X) + (destination.Y- position.Y) *(destination.Y- position.Y));
@@ -34,7 +40,7 @@ namespace _2D_Projekt
             position = new Vector2f (position.X + (destination.X- position.X)/n , position.Y + (destination.Y- position.Y)/n );
             enemySprite.Position = position;
         }
-
+        // Getter Funktionen 
         public FloatRect getEnemyRect()
         {
             return new FloatRect(position.X, position.Y, this.getWidth(), this.getHeight());
