@@ -36,12 +36,12 @@ namespace _2D_Projekt
         static Map map;
         static List<Projektile> liste;
         static Projektile schuss;
+        static int FireRateCounter = 0;
         static void initialize()
         {
             player = new Player();
             map = new Map();
             liste = new List<Projektile>();
-            schuss = new Projektile(player.getPosition());
 
         }
         static void win_Closed(object sender, EventArgs e)
@@ -58,26 +58,30 @@ namespace _2D_Projekt
         static void update()
         {
            player.update(map);
+           Console.WriteLine("Player");
 
-
-           if (schuss.RangeCounter < (int) schuss.getRange())
+            // Erstellen von Kugeln wenn eine Taste gedrückt wird 
+           if (FireRateCounter == player.fireRate)
            {
-               schuss.update();
-               schuss.RangeCounter ++;
-           }
-           else
-           {
-               schuss = new Projektile(player.getPosition());
-           }
-          
-           
-           if (liste.Count != 0)
-           {
-               for (int i = 0; i <= liste.Count -1; i++)
+               if (Keyboard.IsKeyPressed(Keyboard.Key.W) || Keyboard.IsKeyPressed(Keyboard.Key.A) || Keyboard.IsKeyPressed(Keyboard.Key.S) || Keyboard.IsKeyPressed(Keyboard.Key.D))
                {
-                   liste.ElementAt(i).update();
+                   liste.Add(schuss = new Projektile(player));
+               }
+               Console.WriteLine("Liste mit Projektilen abgehakt");
+               FireRateCounter = 0;
+           }
+
+           FireRateCounter++;
+
+            // Projektilpositionsupdate 
+           if (liste.Count > 0)
+           {
+               for (int i = 0; i <= liste.Count - 1; i++)
+               {
+                   liste = liste.ElementAt(i).update(liste, i, player.shotSpeed, player.shotRange);
                }
            }
+           Console.WriteLine("Projektile ubgedatet");
 
         }
 
@@ -86,20 +90,17 @@ namespace _2D_Projekt
         static void draw(RenderWindow win)
         {
             map.draw(win);
-            player.draw(win);
-            if (schuss.getSprite() != null)
-            {
-                schuss.draw(win);
-            }
-            win.Display();
             
             if (liste.Count != 0)
             {
-                for (int i = 0; i <= liste.Count -1; i++)
+                for (int i = 0; i <= liste.Count - 1; i++)
                 {
                     liste.ElementAt(i).draw(win);
                 }
             }
+            player.draw(win);
+            win.Display();
+           
         }
         // Kollisionsabfrage über Rechtecke
         static bool collision (FloatRect Objekt1, FloatRect Objekt2){

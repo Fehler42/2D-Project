@@ -10,67 +10,95 @@ namespace _2D_Projekt
 {
     class Projektile
     {
-        private float Range = 50;
-        private float speed = 5;
-        private Vector2f direction;
+
+        /*
+         * Hier kommen TODOs für diese Klasse hin :
+         * -Startposition von Projektilen auf den Player anpassen ! Achtung Projektile werden vllt. noch Skalierbar
+         * -Projektile skalierbar machen  
+         */
+
+        // Variablen
+        private Vector2f direction = new Vector2f (0,0) ;
         private Sprite projektSprite;
-        public int RangeCounter = 51;
+        // position and startposition of projectile
         Vector2f position;
+        Vector2f sPosition;
        // FloatRect projectileRekt;
+        // Texture, Scale of Texture and width and height
+        Texture projectTexture = new Texture("pictures/bull.png");
+        //fireRate
 
 
 
-        public Projektile(/*List<Projektile> list, */Vector2f Startposition)
+        // Erstellen von Projektilen 
+        public Projektile(Player player)
         {
+                if (Keyboard.IsKeyPressed(Keyboard.Key.W))
+                {
+                    ProjektileInilization(new Vector2f(0, -1), new Vector2f(player.playerPosition.X + 0.5f * player.getWidth(), player.playerPosition.Y));
+                }
+                if (Keyboard.IsKeyPressed(Keyboard.Key.A))
+                {
+                    ProjektileInilization(new Vector2f(-1, 0), new Vector2f(player.playerPosition.X, player.playerPosition.Y - 0.5f * player.getHeight()));
+                }
+                if (Keyboard.IsKeyPressed(Keyboard.Key.S))
+                {
+                    ProjektileInilization(new Vector2f(0, 1), new Vector2f(player.playerPosition.X + 0.5f * player.getWidth(), player.playerPosition.Y));
+                }
+                if (Keyboard.IsKeyPressed(Keyboard.Key.D))
+                {
+                    ProjektileInilization(new Vector2f(1, 0), new Vector2f(player.playerPosition.X, player.playerPosition.Y - 0.5f * player.getHeight()));
+                }
+            
 
-            //if (Keyboard.IsKeyPressed(Keyboard.Key.W))
-            //{
-            //   ProjektileInilization(new Vector2f(0, -1), Startposition);
-            //}
-            //if (Keyboard.IsKeyPressed(Keyboard.Key.A))
-            //{
-            //    ProjektileInilization(new Vector2f(-1, 0), Startposition);
-            //}
-            //if (Keyboard.IsKeyPressed(Keyboard.Key.S))
-            //{
-            //    ProjektileInilization(new Vector2f(0, 1), Startposition);
-            //}
-            //if (Keyboard.IsKeyPressed(Keyboard.Key.D))
-            //{
-                ProjektileInilization(new Vector2f(1, 0), Startposition);
-            //}
-            RangeCounter = 0;
-        }
+           
 
+            }
+
+        // Festlegen von Sprites Positionen und Skalierung
         public void ProjektileInilization(Vector2f _direction, Vector2f startPosition )
         {
-            Texture projectTexture = new Texture("pictures/bull.png");
+            
             projektSprite = new Sprite(projectTexture);
             position = startPosition;
+            sPosition = startPosition;
             direction = _direction;
             projektSprite.Position = position;
             projektSprite.Scale = new Vector2f(1, 1);
         }
+
+        // draw 
         public void draw(RenderWindow win)
         {
             win.Draw(projektSprite);
     
         }
-        public void update()
+
+        // Berechnung der Flugbahn  unter einbeziehen von Schusstempo und Range
+        public List<Projektile> update(List<Projektile> list, int i , int speed , int Range)
         {
-            position = new Vector2f(position.X + (direction.X * speed), position.Y +( direction.Y * speed));
-            projektSprite.Position = position;
-            Console.WriteLine(" Ich bin upd to date");
-        }
-        public Sprite getSprite()
-        {
-            return projektSprite;
+            if (Math.Abs(sPosition.X - position.X) + Math.Abs(sPosition.Y - position.Y) < Range)
+            {
+                position = new Vector2f(position.X + (direction.X * speed), position.Y + (direction.Y * speed));
+                projektSprite.Position = position;
+                
+
+            }
+            else
+            {
+                list.RemoveAt(i);
+                return list;
+            }
+            return list;
+
         }
 
-        public float getRange()
-        {
-            return Range;
-        }
+
+
+
+
+        
+
    
 
 

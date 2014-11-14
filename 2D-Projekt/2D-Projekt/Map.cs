@@ -10,9 +10,13 @@ namespace _2D_Projekt
 {
     class Map
     {
+
+        // Arrays to use for fields
         Tile[,] mapTiles;
         int[,] tileKind;
 
+
+        // checks if the field chosen is walkable
         public bool isWalkable(int i, int j)
         {
             if (tileKind[i, j] == 0)
@@ -24,6 +28,8 @@ namespace _2D_Projekt
                 return false;
             }
         }
+
+        // creating a Testmap 
         public Map()
         {
             tileKind = new int[,] {{1,1,1,1,1,1,1,1,1,1,1,1},
@@ -59,6 +65,7 @@ namespace _2D_Projekt
             }
         }
 
+        // draw the map 
         public void draw(RenderWindow win)
         {
             for (int i = 0; i < tileKind.GetLength(0); i++)

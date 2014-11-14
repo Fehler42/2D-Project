@@ -15,6 +15,9 @@ namespace _2D_Projekt
         public Vector2f playerPosition;
         FloatRect playerRect;
         float speed = 3;
+        public int fireRate = 20;
+        public int shotSpeed = 3;
+        public int shotRange = 150;
 
         
         // Constructor
@@ -39,6 +42,7 @@ namespace _2D_Projekt
         {
             // Vorbereitung Kollisionsabfrage
             playerRect = new FloatRect(playerPosition.X,playerPosition.Y, playerSprite.Texture.Size.X, playerSprite.Texture.Size.Y);
+
             // Variablen zum Abfragen ob eine Kollision mit der Wand stattfindet 
 
             bool upwalkable = map.isWalkable((int)(this.getPosition().X) / 50,(int)(this.getPosition().Y - speed) / 50) && 
@@ -54,6 +58,7 @@ namespace _2D_Projekt
                                 map.isWalkable((int)(this.getPosition().X -speed) / 50,(int)(this.getPosition().Y + this.getHeight()) / 50);
 
 
+            // Aktualisierung der Bewegung
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.Up) && upwalkable)
             {
@@ -77,6 +82,8 @@ namespace _2D_Projekt
 
         }
 
+
+        // getter Methoden 
         public Vector2f getPosition()
         {
             return playerPosition;
