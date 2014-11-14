@@ -19,6 +19,11 @@ namespace _2D_Projekt
         public int shotSpeed = 3;
         public int shotRange = 150;
 
+
+        // Variablen für Lebensanzeige
+        public int life = 3;
+        Sprite heart = new Sprite(new Texture("pictures/heart.png"));
+        public int protectedTime = 20;
         
         // Constructor
         public Player()
@@ -35,8 +40,18 @@ namespace _2D_Projekt
         public void draw(RenderWindow win)
         {
             win.Draw(playerSprite);
+            drawHearts(win);
         }
-
+        //Zeichnen von lifes Herzen 
+        public void drawHearts(RenderWindow win)
+        {
+            heart.Position = new Vector2f(0, 0);
+            for (int i = 0; i < this.life; i++)
+            {
+                win.Draw(heart);
+                heart.Position = new Vector2f(heart.Position.X + (int)(heart.Texture.Size.X * heart.Scale.X), heart.Position.Y);
+            }
+        }
         // Bewegen der Figur
         public void update(Map map)
         {

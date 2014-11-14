@@ -35,6 +35,8 @@ namespace _2D_Projekt
         static Player player;
         static Map map;
         static List<Projektile> liste;
+
+        // Enemy Stuff
         static Projektile schuss;
         static FollowerE enemy1;
         static int FireRateCounter = 0;
@@ -82,11 +84,15 @@ namespace _2D_Projekt
                    liste = liste.ElementAt(i).update(liste, i, player.shotSpeed, player.shotRange);
                }
            }
-
-           if (collision(player.getplayerRect(), enemy1.getEnemyRect()))
+            // Kollisionsabfrage mit Lebensverlust
+            // mit Trefern
+           if (collision(player.getplayerRect(), enemy1.getEnemyRect()) && player.protectedTime <= 0)
            {
-               Console.WriteLine("Kollision");
+               player.life--;
+               player.protectedTime = 20;
            }
+           player.protectedTime--;
+
         }
 
         // Aktualisieren der Sprites im Fenster
