@@ -13,7 +13,7 @@ namespace _2D_Projekt
         // Variablen
         Sprite enemySprite = new Sprite();
         Vector2f position;
-        FloatRect EnemyRect;
+        public int life = 3;
 
 
         // Constructor

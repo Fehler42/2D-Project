@@ -86,16 +86,41 @@ namespace _2D_Projekt
            {
                for (int i = 0; i <= liste.Count - 1; i++)
                {
-                   liste = liste.ElementAt(i).update(liste, i, player.shotSpeed, player.shotRange);
+                   liste = liste.ElementAt(i).update(liste, i, player.shotSpeed, player.shotRange , map ,enemy1);
+
                }
            }
+<<<<<<< HEAD
             // Kollisionsabfrage mit Lebensverlust
             // mit Trefern
            if ((collision(player.getplayerRect(), enemy1.getEnemyRect()) && player.protectedTime <= 0) || (collision(player.getplayerRect(), enemy2.getEnemyRect()) && player.protectedTime <= 0))
+=======
+            // Projektil mit Gegnerkontakt
+           for (int i = 0; i < liste.Count; i++)
+>>>>>>> fbcccd3e720ef90fad618535b29a14314af8c5f9
            {
-               player.life--;
-               player.protectedTime = 20;
+               if (collision(liste.ElementAt(i).getProjektileRekt(), enemy1.getEnemyRect()))
+               {
+                   liste.RemoveAt(i);
+                   enemy1.life--;
+                   if (enemy1.life == 0)
+                   {
+                       Console.WriteLine(" Ich bin Tod");
+                   }
+               }
+
            }
+             
+
+
+
+                   // Kollisionsabfrage mit Lebensverlust
+                   // mit Trefern
+                   if (collision(player.getplayerRect(), enemy1.getEnemyRect()) && player.protectedTime <= 0)
+                   {
+                       player.life--;
+                       player.protectedTime = 20;
+                   }
            player.protectedTime--;
 
         }
