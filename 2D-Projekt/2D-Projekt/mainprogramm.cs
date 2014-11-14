@@ -35,8 +35,11 @@ namespace _2D_Projekt
         static Player player;
         static Map map;
         static List<Projektile> liste;
+
+        // Enemy Stuff
         static Projektile schuss;
         static FollowerE enemy1;
+        static Charger enemy2;
         static int FireRateCounter = 0;
         static void initialize()
         {
@@ -44,6 +47,7 @@ namespace _2D_Projekt
             map = new Map();
             liste = new List<Projektile>();
             enemy1 = new FollowerE();
+            enemy2 = new Charger();
 
         }
         static void win_Closed(object sender, EventArgs e)
@@ -61,6 +65,9 @@ namespace _2D_Projekt
         {
            player.update(map);
            enemy1.update(player.playerPosition);
+           enemy2.update(player.playerPosition);
+          
+        
 
             // Erstellen von Kugeln wenn eine Taste gedrückt wird 
            if (FireRateCounter == player.fireRate)
@@ -82,11 +89,15 @@ namespace _2D_Projekt
                    liste = liste.ElementAt(i).update(liste, i, player.shotSpeed, player.shotRange);
                }
            }
-
-           if (collision(player.getplayerRect(), enemy1.getEnemyRect()))
+            // Kollisionsabfrage mit Lebensverlust
+            // mit Trefern
+           if ((collision(player.getplayerRect(), enemy1.getEnemyRect()) && player.protectedTime <= 0) || (collision(player.getplayerRect(), enemy2.getEnemyRect()) && player.protectedTime <= 0))
            {
-               Console.WriteLine("Kollision");
+               player.life--;
+               player.protectedTime = 20;
            }
+           player.protectedTime--;
+
         }
 
         // Aktualisieren der Sprites im Fenster
@@ -104,6 +115,7 @@ namespace _2D_Projekt
             }
             player.draw(win);
             enemy1.draw(win);
+            enemy2.draw(win);
             win.Display();
            
         }
