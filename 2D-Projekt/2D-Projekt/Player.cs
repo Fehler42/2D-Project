@@ -44,25 +44,17 @@ namespace _2D_Projekt
             playerRect = new FloatRect(playerPosition.X,playerPosition.Y, playerSprite.Texture.Size.X, playerSprite.Texture.Size.Y);
             // Variablen zum Abfragen ob eine Kollision mit der Wand stattfindet 
 
-            bool upwalkable = map.isWalkable((int)(this.getPosition().Y - speed) / 50,
-                                (int)(this.getPosition().Y) / 50) && 
-                                map.isWalkable((int)(this.getPosition().Y - speed) / 50,
-                                (int)(this.getPosition().Y + this.getHeight()) / 50);
+            bool upwalkable = map.isWalkable((int)(this.getPosition().X) / 50,(int)(this.getPosition().Y - speed) / 50) && 
+                              map.isWalkable((int)(this.getPosition().X + this.getWidth()) / 50, (int)(this.getPosition().Y - speed) / 50);
 
-            bool downwalkable = map.isWalkable((int)(this.getPosition().Y + speed) / 50,
-                               (int)(this.getPosition().Y) / 50) &&
-                               map.isWalkable((int)(this.getPosition().Y + speed) / 50,
-                               (int)(this.getPosition().Y + this.getHeight()) / 50);
+            bool downwalkable = map.isWalkable((int)(this.getPosition().X ) / 50,(int)(this.getPosition().Y + (int) this.getHeight() + speed) / 50) &&
+                                map.isWalkable((int)(this.getPosition().X + this.getWidth()) / 50, (int)(this.getPosition().Y + (int)this.getHeight() + speed) / 50);
 
-            bool rightwalkable = map.isWalkable((int)(this.getPosition().X + speed) / 50,
-                              (int)(this.getPosition().Y) / 50) &&
-                               map.isWalkable((int)(this.getPosition().X + speed) / 50,
-                               (int)(this.getPosition().Y + this.getHeight()) / 50);
+            bool rightwalkable = map.isWalkable((int)(this.getPosition().X +(int) this.getWidth() +speed) / 50,(int)(this.getPosition().Y) / 50) &&
+                                 map.isWalkable((int)(this.getPosition().X +(int) this.getWidth() +speed) / 50,(int)(this.getPosition().Y + this.getHeight()) / 50);
 
-            bool leftwalkable = map.isWalkable((int)(this.getPosition().X - speed) / 50,
-                              (int)(this.getPosition().Y) / 50) &&
-                               map.isWalkable((int)(this.getPosition().X +-speed) / 50,
-                               (int)(this.getPosition().Y + this.getHeight()) / 50);
+            bool leftwalkable = map.isWalkable((int)(this.getPosition().X - speed) / 50,(int)(this.getPosition().Y) / 50) &&
+                                map.isWalkable((int)(this.getPosition().X -speed) / 50,(int)(this.getPosition().Y + this.getHeight()) / 50);
 
 
 
