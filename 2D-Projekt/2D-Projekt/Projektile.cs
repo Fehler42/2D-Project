@@ -75,14 +75,16 @@ namespace _2D_Projekt
         }
 
         // Berechnung der Flugbahn  unter einbeziehen von Schusstempo und Range
-        public List<Projektile> update(List<Projektile> list, int i , int speed , int Range)
+        public List<Projektile> update(List<Projektile> list, int i , int speed , int Range , Map map , FollowerE foe)
         {
-            if (Math.Abs(sPosition.X - position.X) + Math.Abs(sPosition.Y - position.Y) < Range)
+            Vector2f wallCollisionTest = new Vector2f(position.X + (direction.X * speed), position.Y + (direction.Y * speed));
+
+            bool freeWay = map.isWalkable((int)wallCollisionTest.X /50,(int) wallCollisionTest.Y/50);
+
+            if (Math.Abs(sPosition.X - position.X) + Math.Abs(sPosition.Y - position.Y) < Range && freeWay)
             {
                 position = new Vector2f(position.X + (direction.X * speed), position.Y + (direction.Y * speed));
                 projektSprite.Position = position;
-                
-
             }
             else
             {
@@ -93,15 +95,31 @@ namespace _2D_Projekt
 
         }
 
+        static bool collision(FloatRect Objekt1, FloatRect Objekt2)
+        {
 
+            if (Objekt1.Intersects(Objekt2))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
-
-
-        
-
-   
-
-
+        }
+        public FloatRect getProjektileRekt()
+        {
+            return new FloatRect(position.X, position.Y , this.getWidth() , this.getHeight());
+        }
+        public float getWidth()
+        {
+            return projektSprite.Texture.Size.X * projektSprite.Scale.X;
+        }
+        public float getHeight()
+        {
+            return projektSprite.Texture.Size.Y * projektSprite.Scale.Y;
+        }
 
     }
 }
