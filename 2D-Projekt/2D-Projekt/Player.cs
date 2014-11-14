@@ -99,7 +99,9 @@ namespace _2D_Projekt
             return playerSprite.Texture.Size.X * playerSprite.Scale.X;
         }
 
-
+        public FloatRect getplayerRect(){
+            return new FloatRect(playerPosition.X, playerPosition.Y, this.getWidth(), this.getHeight());
+        }
 
 
 

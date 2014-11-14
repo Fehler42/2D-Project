@@ -36,12 +36,14 @@ namespace _2D_Projekt
         static Map map;
         static List<Projektile> liste;
         static Projektile schuss;
+        static FollowerE enemy1;
         static int FireRateCounter = 0;
         static void initialize()
         {
             player = new Player();
             map = new Map();
             liste = new List<Projektile>();
+            enemy1 = new FollowerE();
 
         }
         static void win_Closed(object sender, EventArgs e)
@@ -58,7 +60,7 @@ namespace _2D_Projekt
         static void update()
         {
            player.update(map);
-           Console.WriteLine("Player");
+           enemy1.update(player.playerPosition);
 
             // Erstellen von Kugeln wenn eine Taste gedrückt wird 
            if (FireRateCounter == player.fireRate)
@@ -67,7 +69,6 @@ namespace _2D_Projekt
                {
                    liste.Add(schuss = new Projektile(player));
                }
-               Console.WriteLine("Liste mit Projektilen abgehakt");
                FireRateCounter = 0;
            }
 
@@ -81,8 +82,11 @@ namespace _2D_Projekt
                    liste = liste.ElementAt(i).update(liste, i, player.shotSpeed, player.shotRange);
                }
            }
-           Console.WriteLine("Projektile ubgedatet");
 
+           if (collision(player.getplayerRect(), enemy1.getEnemyRect()))
+           {
+               Console.WriteLine("Kollision");
+           }
         }
 
         // Aktualisieren der Sprites im Fenster
@@ -99,6 +103,7 @@ namespace _2D_Projekt
                 }
             }
             player.draw(win);
+            enemy1.draw(win);
             win.Display();
            
         }
