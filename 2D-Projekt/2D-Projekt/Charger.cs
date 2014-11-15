@@ -14,10 +14,7 @@ namespace _2D_Projekt
         Sprite enemySprite = new Sprite(new Texture("pictures/charger.png"));
         Vector2f position;
         public int life = 1;
-<<<<<<< HEAD
 
-=======
->>>>>>> 6541eb9a3513b1e5835ef19dff8f30a29b90a0fd
 
         // Constructor
         public Charger()

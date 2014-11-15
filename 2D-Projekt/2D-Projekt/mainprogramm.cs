@@ -116,14 +116,13 @@ namespace _2D_Projekt
            }
 
             // Kollisionsabfrage mit Lebensverlust
-<<<<<<< HEAD
+
             // mit Trefern
            if ((collision(player.getplayerRect(), enemy1.getEnemyRect()) && player.protectedTime <= 0) || (collision(player.getplayerRect(), enemy2.getEnemyRect()) && player.protectedTime <= 0))
 
-=======
             // mit Treffern
            for (int i = 0; i < enemyList.Count; i++)
->>>>>>> 6541eb9a3513b1e5835ef19dff8f30a29b90a0fd
+
            {
                if (collision(player.getplayerRect(), enemyList.ElementAt(i).getEnemyRect()) && player.protectedTime <= 0)
                {
@@ -134,14 +133,14 @@ namespace _2D_Projekt
            player.protectedTime--;
 
 
-<<<<<<< HEAD
+
             // Projektil mit Gegnerkontakt
            for (int i = 0; i < liste.Count; i++)
-=======
+
 
             // Projektil mit Gegnerkontakt entfernen von Feinden 
            for (int i = 0; i < playerProjektileList.Count; i++)
->>>>>>> 6541eb9a3513b1e5835ef19dff8f30a29b90a0fd
+
 
            {
 
