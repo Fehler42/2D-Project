@@ -15,6 +15,9 @@ namespace _2D_Projekt
         Vector2f position;
         public int life = 1;
 
+        // Ende der Funktion
+        //================================================================================================
+        //================================================================================================
 
         // Constructor
         public Charger(int x , int y)
@@ -25,39 +28,50 @@ namespace _2D_Projekt
             enemySprite.Scale = new Vector2f(0.5f, 0.5f);
         }
 
+        // Ende der Funktion
+        //================================================================================================
+        //================================================================================================
+
         // draw
         public void draw(RenderWindow win)
         {
             win.Draw(enemySprite);
         }
-        // calculates next step to player (ignores walls) + charge
+
+        // Ende der Funktion
+        //================================================================================================
+        //================================================================================================
+
+        // Berechnet den direkten Weg zum Player und initialisiert den Charge ( Wände werden ignoriert)
         public void update(Vector2f destination)
         {
             int xcharge = 1, ycharge = 1;
+            //Skalar das den Vektor auf die Länge 1 kürzen kann
             float n = (float)Math.Sqrt((destination.X - position.X) * (destination.X - position.X) + (destination.Y - position.Y) * (destination.Y - position.Y));
-                // if(same Y position)  charge
+
+                // löst den Charge bei ähnlichen Y Koordinaten aus
                 if ((position.Y - 10 <= destination.Y) && (position.Y + 10 >= destination.Y))
                 {
                     xcharge = 5;
                 }
-                // if(same Y position)  charge
+                // löst den Charge bei ähnlichen x Koordinaten aus 
                 if ((position.X - 10 <= destination.X) && (position.X + 10 >= destination.X))
                 {
                     ycharge = 5;
                 }
+          // Versetzt den Sprite 
+          position = new Vector2f(position.X + (destination.X - position.X) * xcharge / n, position.Y + (destination.Y - position.Y) * ycharge / n);
+          //  Spritepositionsupdate 
+          enemySprite.Position = position;
 
+       }
 
-                position = new Vector2f(position.X + (destination.X - position.X) * xcharge / n, position.Y + (destination.Y - position.Y) * ycharge / n);
-               
-                
-            
-          
-            enemySprite.Position = position;
-
-            }
-        
-
+        // Ende der Funktion
+        //================================================================================================
+        //================================================================================================
        
+        // GetterFunktionen
+
         public FloatRect getEnemyRect()
         {
             return new FloatRect(position.X, position.Y, this.getWidth(), this.getHeight());
@@ -72,5 +86,9 @@ namespace _2D_Projekt
         {
             return enemySprite.Texture.Size.X * enemySprite.Scale.X;
         }
+
+        // Ende der Getterfunktion
+        //================================================================================================
+        //================================================================================================
     }
 }

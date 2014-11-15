@@ -13,8 +13,13 @@ namespace _2D_Projekt
         bool walkable;
         Sprite TileSprite;
         Vector2f position;
-        FloatRect TileRect; 
+        FloatRect TileRect;
 
+        // Ende der Variablen
+        //================================================================================================
+        //================================================================================================
+
+        //Teilconstructor
         public Tile(bool _walkable, string texturepath, Vector2f _position)
         {
             walkable = _walkable ;
@@ -24,11 +29,18 @@ namespace _2D_Projekt
             position = _position;
             TileRect =  new FloatRect(position.X,position.Y, TileSprite.Texture.Size.X, TileSprite.Texture.Size.Y);
         }
+        // Ende der Funktion
+        //================================================================================================
+        //================================================================================================
 
+        // Zeichenfunktion
         public void draw(RenderWindow win)
         {
             win.Draw(TileSprite);
         }
+        // Ende der Funktion
+        //================================================================================================
+        //================================================================================================
 
 
     }

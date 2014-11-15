@@ -13,12 +13,18 @@ namespace _2D_Projekt
         Sprite upSprite;
         Vector2f position;
 
-        // defines the kind of power up detected
+        // Legt die Art des PowerUps fest 
         public int kind = 0;
-        //1-> RangeUp 
-        //2-> HealthUp
-        //3-> Speed
-        //4-> Shot Speed
+        //1-> Reichweite
+        //2-> Leben
+        //3-> Spielergeschwindigkeit
+        //4-> Schusstempo (Buggy : da bei erhöhtem Tempo Kollision ausgelassen werden können TODO : Schwellenwert finden) 
+
+        // Ende der Funktion
+        //================================================================================================
+        //================================================================================================
+
+        // Constructoe
         public PowerUp(int i)
         {
             kind = i;
@@ -44,9 +50,15 @@ namespace _2D_Projekt
             {
                 upSprite = new Sprite(new Texture("pictures/firerate.png"));
             }
-            position = new Vector2f(200, 300);
+            // Positon wird festgelegt aus diesem Grund müssen die Regeln bei der Maperstellung beachtet werden
+            position = new Vector2f(375,275);
             upSprite.Position = position;
         }
+
+        // Ende der Funktion
+        //================================================================================================
+        //================================================================================================
+
         // Bearbeiten der Werte des Players 
         public void giveThePower(Player player)
         {
@@ -54,13 +66,13 @@ namespace _2D_Projekt
             {
                 player.shotRange = player.shotRange + 50;
             }
-            if (kind == 2)
+            if (kind == 2 )
             {
                 player.life++;
             }
             if (kind == 3)
             {
-                player.speed =player.speed + 2;
+                player.speed =player.speed + 1;
             }
             if (kind == 4)
             {
@@ -68,10 +80,17 @@ namespace _2D_Projekt
             }
             if (kind == 5)
             {
-                player.fireRate = player.fireRate - 5;
+                if (player.fireRate >= 3)
+                {
+                    player.fireRate = player.fireRate - 2;
+                }               
             }
 
         }
+
+        // Ende der Funktion
+        //================================================================================================
+        //================================================================================================
 
         // 0815 drawkrams und getter-Methoden
         public void draw(RenderWindow win)
@@ -91,5 +110,9 @@ namespace _2D_Projekt
         {
             return upSprite.Texture.Size.X * upSprite.Scale.X;
         }
+
+        // Ende der Getterfunktionen
+        //================================================================================================
+        //================================================================================================
     }
 }

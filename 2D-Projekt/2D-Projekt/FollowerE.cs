@@ -16,6 +16,10 @@ namespace _2D_Projekt
         public int life = 3;
 
 
+        // Ende der Funktion
+        //================================================================================================
+        //================================================================================================
+
         // Constructor
         public FollowerE(int x , int y)
         {
@@ -26,20 +30,35 @@ namespace _2D_Projekt
             enemySprite.Scale = new Vector2f(0.5f, 0.5f);
         }
 
+        // Ende der Funktion
+        //================================================================================================
+        //================================================================================================
+
         // draw
         public void draw(RenderWindow win)
         {
             win.Draw(enemySprite);
         }
 
-        // calculates next step to player (ignores walls)
+        // Ende der Funktion
+        //================================================================================================
+        //================================================================================================
+
+        // Berechnet den direkten Weg zum Player ( Wände werden ignoriert)
         public void update(Vector2f destination)
         {
+            //Skalar das den Vektor auf die Länge 1 kürzen kann
             float n =(float) Math.Sqrt((destination.X- position.X) *(destination.X- position.X) + (destination.Y- position.Y) *(destination.Y- position.Y));
-
+            // Versetzt den Sprite 
             position = new Vector2f (position.X + (destination.X- position.X)/n , position.Y + (destination.Y- position.Y)/n );
+            //  Spritepositionsupdate
             enemySprite.Position = position;
         }
+
+        // Ende der Funktion
+        //================================================================================================
+        //================================================================================================
+
         // Getter Funktionen 
         public FloatRect getEnemyRect()
         {
@@ -55,5 +74,9 @@ namespace _2D_Projekt
         {
             return enemySprite.Texture.Size.X * enemySprite.Scale.X;
         }
+
+        // Ende der Getterfunktionen
+        //================================================================================================
+        //================================================================================================
     }
 }
