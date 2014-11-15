@@ -16,10 +16,10 @@ namespace _2D_Projekt
         public int life = 1;
 
         // Constructor
-        public Charger()
+        public Charger(int x , int y)
         {
 
-            position = new Vector2f(200, 500);
+            position = new Vector2f(x, y);
             enemySprite.Position = position;
             enemySprite.Scale = new Vector2f(0.5f, 0.5f);
         }

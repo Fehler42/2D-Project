@@ -38,8 +38,10 @@ namespace _2D_Projekt
 
         // Enemy Stuff
         static List<dynamic> enemyList;
-        static int[] enemies = { 1, 1, 2, 2 };
-        static int enemyListcount  = 0;
+        static int[,] enemies = { {1,100,200}
+                                , {1,200,300},
+                                  {2,600,550},
+                                  {2,300,500}};
 
         static int FireRateCounter = 0;
         static void initialize()
@@ -62,15 +64,15 @@ namespace _2D_Projekt
         static void loadContent()
         {
 
-            for (int i = 0; i < enemies.Length; i++)
+            for (int i = 0; i < enemies.GetLength(0); i++)
             {
-                if (enemies[i] == 1)
+                if (enemies[i,0] == 1)
                 {
-                    enemyList.Add(new FollowerE());
+                    enemyList.Add(new FollowerE(enemies[i,1],enemies[i,2]));
                 }
-                if (enemies[i] == 2)
+                if (enemies[i,0] == 2)
                 {
-                    enemyList.Add(new Charger());
+                    enemyList.Add(new Charger(enemies[i, 1], enemies[i, 2]));
                 }
             }
 
