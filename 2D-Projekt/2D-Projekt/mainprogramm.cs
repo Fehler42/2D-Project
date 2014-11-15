@@ -94,14 +94,13 @@ namespace _2D_Projekt
             // Kollisionsabfrage mit Lebensverlust
             // mit Trefern
            if ((collision(player.getplayerRect(), enemy1.getEnemyRect()) && player.protectedTime <= 0) || (collision(player.getplayerRect(), enemy2.getEnemyRect()) && player.protectedTime <= 0))
-<<<<<<< HEAD
-=======
+
            {
                player.life--;
                player.protectedTime = 20;
            }
            player.protectedTime--;
->>>>>>> 304fddee797df2a0e46a98d8832dc89812467938
+
 
             // Projektil mit Gegnerkontakt
            for (int i = 0; i < liste.Count; i++)
@@ -114,6 +113,15 @@ namespace _2D_Projekt
                    if (enemy1.life == 0)
                    {
                        Console.WriteLine(" Ich bin Tod");
+                   }
+               }
+               if (collision(liste.ElementAt(i).getProjektileRekt(), enemy2.getEnemyRect()))
+               {
+                   liste.RemoveAt(i);
+                   enemy2.life--;
+                   if (enemy2.life == 0)
+                   {
+                       Console.WriteLine(" Du hast mich erwischt");
                    }
                }
 

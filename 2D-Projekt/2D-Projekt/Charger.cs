@@ -13,6 +13,7 @@ namespace _2D_Projekt
         // Variablen
         Sprite enemySprite = new Sprite(new Texture("pictures/charger.png"));
         Vector2f position;
+        public int life = 1;
 
 
         // Constructor
