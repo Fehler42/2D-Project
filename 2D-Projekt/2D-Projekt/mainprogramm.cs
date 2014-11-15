@@ -44,14 +44,19 @@ namespace _2D_Projekt
                                   {2,300,500}};
 
         static int FireRateCounter = 0;
+
+        // Epic loot 
+        static List<PowerUp> powerup;
+        static bool LootTaken = false;
+
         static void initialize()
         {
             player = new Player();
             map = new Map();
             playerProjektileList = new List<Projektile>();
             enemyList = new List<dynamic>();
-            //enemy1 = new FollowerE();
-            //enemy2 = new Charger();
+            powerup = new List<PowerUp>();
+            
 
 
 
@@ -131,7 +136,7 @@ namespace _2D_Projekt
            player.protectedTime--;
 
 
-            // Projektil mit Gegnerkontakt entfernen von Feinden 
+            // Projektil mit Gegnerkontakt, Feind schaden und entfernen von Feinden 
            for (int i = 0; i < playerProjektileList.Count; i++)
 
 
@@ -158,6 +163,20 @@ namespace _2D_Projekt
 
            }
 
+           if (enemyList.Count == 0 && LootTaken== false)
+           {
+               powerup.Add(new PowerUp(2));
+
+               if (collision(player.getplayerRect(), powerup.ElementAt(0).getPowerUpRect()))
+               {
+                   powerup.ElementAt(0).giveThePower(player);
+                   //powerup.RemoveAt(0);
+                   LootTaken = true;
+               }
+     
+           }
+
+
         }
 
 
@@ -176,14 +195,28 @@ namespace _2D_Projekt
             }
             player.draw(win);
 
+          
+
             // drawn von enemies
             for (int i = 0; i < enemyList.Count; i++)
             {
                 enemyList.ElementAt(i).draw(win);
             }
 
+            // draw PowerUp
+            if (powerup.Count != 0)
+            {
+                powerup.ElementAt(0).draw(win);
+                powerup.RemoveAt(0);
+            }
 
-            win.Display();
+
+
+
+
+
+                win.Display();
+ 
            
         }
         // Kollisionsabfrage über Rechtecke

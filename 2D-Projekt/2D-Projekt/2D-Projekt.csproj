@@ -53,6 +53,7 @@
     <Compile Include="Charger.cs" />
     <Compile Include="FollowerE.cs" />
     <Compile Include="Map.cs" />
+    <Compile Include="PowerUp.cs" />
     <Compile Include="Projektile.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Player.cs" />
@@ -99,7 +100,13 @@
     <Content Include="pictures\heart.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="pictures\heart2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="pictures\player.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pictures\rangeUp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
