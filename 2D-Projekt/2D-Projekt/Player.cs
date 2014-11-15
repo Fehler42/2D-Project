@@ -13,7 +13,9 @@ namespace _2D_Projekt
         // Klassenvariablen
         Sprite playerSprite;
         public Vector2f playerPosition;
-        FloatRect playerRect;
+
+        // Wichtige public Variablen für den  Player . In Kommentaren befinden sich passable Standartwerte
+
         public float speed = 3 ;//3
         public int fireRate = 20; // 20
         public int shotSpeed = 3; // 3
@@ -24,7 +26,11 @@ namespace _2D_Projekt
         public int life = 3;
         Sprite heart = new Sprite(new Texture("pictures/heart.png"));
         public int protectedTime = 20;
-        
+
+        // Ende der Variablen
+        //================================================================================================
+        //================================================================================================
+
         // Constructor
         public Player()
         {
@@ -36,12 +42,22 @@ namespace _2D_Projekt
 
         }
 
+        // Ende der Funktion
+        //================================================================================================
+        //================================================================================================
+
+
         // Zeichnen des Sprites
         public void draw(RenderWindow win)
         {
             win.Draw(playerSprite);
             drawHearts(win);
         }
+
+        // Ende der Funktion
+        //================================================================================================
+        //================================================================================================
+
         //Zeichnen von lifes Herzen 
         public void drawHearts(RenderWindow win)
         {
@@ -52,11 +68,14 @@ namespace _2D_Projekt
                 heart.Position = new Vector2f(heart.Position.X + (int)(heart.Texture.Size.X * heart.Scale.X), heart.Position.Y);
             }
         }
+
+        // Ende der Funktion
+        //================================================================================================
+        //================================================================================================
+
         // Bewegen der Figur
         public void update(Map map)
         {
-            // Vorbereitung Kollisionsabfrage
-            playerRect = new FloatRect(playerPosition.X,playerPosition.Y, playerSprite.Texture.Size.X, playerSprite.Texture.Size.Y);
 
             // Variablen zum Abfragen ob eine Kollision mit der Wand stattfindet 
 
@@ -92,10 +111,15 @@ namespace _2D_Projekt
                 playerPosition = new Vector2f(playerPosition.X - speed, playerPosition.Y);
             }
 
-            // Projektile mit wasd abfeuern 
+            // Aktualisierung der Spriteposition
+
             playerSprite.Position = playerPosition;
 
         }
+
+        // Ende der Funktion
+        //================================================================================================
+        //================================================================================================
 
 
         // getter Methoden 
@@ -117,81 +141,12 @@ namespace _2D_Projekt
         public FloatRect getplayerRect(){
             return new FloatRect(playerPosition.X, playerPosition.Y, this.getWidth(), this.getHeight());
         }
+        // Ende der Getterfunktionen
+        //================================================================================================
+        //================================================================================================
+
 
 
 
     }
 }
-
-
-
-
-//  float gravity = 0.1f;
-//  bool gravityTester = false;
-//  int jumpCount = 0;
-// bool imSprungTest = false;
-
-//// Bewegung nach rechts
-//if (Keyboard.IsKeyPressed(Keyboard.Key.Right))
-//{
-//    playerPosition = new Vector2f(playerPosition.X + 0.1f, playerPosition.Y);
-//}
-//// Bewegung nach links
-//if (Keyboard.IsKeyPressed(Keyboard.Key.Left))
-//{
-//    playerPosition = new Vector2f(playerPosition.X - 0.1f, playerPosition.Y);
-//}
-////if (Keyboard.IsKeyPressed(Keyboard.Key.LShift))
-////{
-////    gravity = gravity * -1;
-////}
-//// Springen 
-//if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
-//{
-//    //Absprung
-//    if (imSprungTest == false && jumpCount < 800)
-//    {
-//        playerPosition = new Vector2f(playerPosition.X, playerPosition.Y -  0.01f);
-//        jumpCount++;
-//    }
-//    else //Fall
-//    {
-//        imSprungTest = true;
-
-//    }
-
-
-//}//Frühzeiter Abbruch des Sprungs
-//if(imSprungTest == false && Keyboard.IsKeyPressed(Keyboard.Key.Space) == false)
-//{
-//    imSprungTest = true;
-//}
-
-
-//if (imSprungTest == true && jumpCount > 0)
-//{
-//    playerPosition = new Vector2f(playerPosition.X, playerPosition.Y + 0.01f);
-//    jumpCount--;
-//}
-//else
-//{
-
-//    if (playerPosition.Y < 550)
-//    {
-//        playerPosition.Y = playerPosition.Y + 0.1f;
-//        jumpCount --;
-//    }
-
-//    imSprungTest = false;
-
-//}
-
-//Schwerkraft  
-//else
-//{
-//    if (playerPosition.Y < 550)
-//    {
-//        playerPosition.Y = playerPosition.Y + 0.1f;
-//        jumpCount--;
-//    }
-//}
