@@ -13,12 +13,12 @@ namespace _2D_Projekt
 
         // Variablen
         private Vector2f direction = new Vector2f (0,0) ;
-        private Sprite projektSprite;
+        
         // position und startposition von Projektilen
         Vector2f position;
         Vector2f sPosition;
         // Texture, Scale of Texture and width and height
-        Texture projectTexture = new Texture("pictures/bull.png");
+        private Sprite projektSprite = new Sprite(new Texture("pictures/bull.png"));
 
         // Ende der Variablen
         //================================================================================================
@@ -35,15 +35,15 @@ namespace _2D_Projekt
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.A))
                 {
-                    ProjektileInilization(new Vector2f(-1, 0), new Vector2f(player.playerPosition.X, player.playerPosition.Y - 0.5f * player.getHeight()));
+                    ProjektileInilization(new Vector2f(-1, 0), new Vector2f(player.playerPosition.X, player.playerPosition.Y ));
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.S))
                 {
-                    ProjektileInilization(new Vector2f(0, 1), new Vector2f(player.playerPosition.X + 0.5f * player.getWidth(), player.playerPosition.Y));
+                    ProjektileInilization(new Vector2f(0, 1), new Vector2f(player.playerPosition.X + 0.5f * player.getWidth(), player.playerPosition.Y + 0.5f * player.getHeight()));
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.D))
                 {
-                    ProjektileInilization(new Vector2f(1, 0), new Vector2f(player.playerPosition.X, player.playerPosition.Y - 0.5f * player.getHeight()));
+                    ProjektileInilization(new Vector2f(1, 0), new Vector2f(player.playerPosition.X + 0.5f * player.getWidth(), player.playerPosition.Y));
                 }
             }
 
@@ -55,7 +55,6 @@ namespace _2D_Projekt
         public void ProjektileInilization(Vector2f _direction, Vector2f startPosition )
         {
             
-            projektSprite = new Sprite(projectTexture);
             position = startPosition;
             sPosition = startPosition;
             direction = _direction;

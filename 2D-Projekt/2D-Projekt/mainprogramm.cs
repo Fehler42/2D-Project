@@ -18,9 +18,7 @@ namespace _2D_Projekt
             win.SetFramerateLimit(45);
             // Achte darauf, ob Fenster geschlossen wird
             win.Closed += win_Closed;
-
-
-                
+            // Startscreen 
                 while (!(Keyboard.IsKeyPressed(Keyboard.Key.Space)))
                 {
                     win.Draw(new Sprite(new Texture("pictures/startscreen.png")));
