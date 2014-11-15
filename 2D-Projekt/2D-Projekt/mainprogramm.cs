@@ -34,20 +34,24 @@ namespace _2D_Projekt
         }
         static Player player;
         static Map map;
-        static List<Projektile> liste;
+        static List<Projektile> playerProjektileList;
 
         // Enemy Stuff
-        static Projektile schuss;
-        static FollowerE enemy1;
-        static Charger enemy2;
+        static List<dynamic> enemyList;
+        static int[] enemies = { 1, 1, 2, 2 };
+        static int enemyListcount  = 0;
+
         static int FireRateCounter = 0;
         static void initialize()
         {
             player = new Player();
             map = new Map();
-            liste = new List<Projektile>();
-            enemy1 = new FollowerE();
-            enemy2 = new Charger();
+            playerProjektileList = new List<Projektile>();
+            enemyList = new List<dynamic>();
+            //enemy1 = new FollowerE();
+            //enemy2 = new Charger();
+
+
 
         }
         static void win_Closed(object sender, EventArgs e)
@@ -58,14 +62,34 @@ namespace _2D_Projekt
         static void loadContent()
         {
 
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                if (enemies[i] == 1)
+                {
+                    enemyList.Add(new FollowerE());
+                }
+                if (enemies[i] == 2)
+                {
+                    enemyList.Add(new Charger());
+                }
+            }
+
+
+
+
         }
         // Updatefunktion
 
         static void update()
         {
            player.update(map);
-           enemy1.update(player.playerPosition);
-           enemy2.update(player.playerPosition);
+
+            // enemyUpdate
+           for (int i = 0; i < enemyList.Count; i++)
+           {
+               enemyList.ElementAt(i).update(player.playerPosition);
+           }
+
           
         
 
@@ -74,7 +98,7 @@ namespace _2D_Projekt
            {
                if (Keyboard.IsKeyPressed(Keyboard.Key.W) || Keyboard.IsKeyPressed(Keyboard.Key.A) || Keyboard.IsKeyPressed(Keyboard.Key.S) || Keyboard.IsKeyPressed(Keyboard.Key.D))
                {
-                   liste.Add(schuss = new Projektile(player));
+                   playerProjektileList.Add(new Projektile(player));
                }
                FireRateCounter = 0;
            }
@@ -82,38 +106,61 @@ namespace _2D_Projekt
            FireRateCounter++;
 
             // Projektilpositionsupdate 
-           if (liste.Count > 0)
+           if (playerProjektileList.Count > 0)
            {
-               for (int i = 0; i <= liste.Count - 1; i++)
+               for (int i = 0; i <= playerProjektileList.Count - 1; i++)
                {
-                   liste = liste.ElementAt(i).update(liste, i, player.shotSpeed, player.shotRange , map ,enemy1);
+                   playerProjektileList = playerProjektileList.ElementAt(i).update(playerProjektileList, i, player.shotSpeed, player.shotRange , map);
 
                }
            }
 
             // Kollisionsabfrage mit Lebensverlust
+<<<<<<< HEAD
             // mit Trefern
            if ((collision(player.getplayerRect(), enemy1.getEnemyRect()) && player.protectedTime <= 0) || (collision(player.getplayerRect(), enemy2.getEnemyRect()) && player.protectedTime <= 0))
 
+=======
+            // mit Treffern
+           for (int i = 0; i < enemyList.Count; i++)
+>>>>>>> 6541eb9a3513b1e5835ef19dff8f30a29b90a0fd
            {
-               player.life--;
-               player.protectedTime = 20;
+               if (collision(player.getplayerRect(), enemyList.ElementAt(i).getEnemyRect()) && player.protectedTime <= 0)
+               {
+                   player.life--;
+                   player.protectedTime = 20;
+               }
            }
            player.protectedTime--;
 
 
+<<<<<<< HEAD
             // Projektil mit Gegnerkontakt
            for (int i = 0; i < liste.Count; i++)
+=======
+
+            // Projektil mit Gegnerkontakt entfernen von Feinden 
+           for (int i = 0; i < playerProjektileList.Count; i++)
+>>>>>>> 6541eb9a3513b1e5835ef19dff8f30a29b90a0fd
 
            {
-               if (collision(liste.ElementAt(i).getProjektileRekt(), enemy1.getEnemyRect()))
-               {
-                   liste.RemoveAt(i);
-                   enemy1.life--;
-                   if (enemy1.life == 0)
+
+                   for (int k = enemyList.Count - 1; k >= 0; k--)
                    {
-                       Console.WriteLine(" Ich bin Tod");
-                   }
+
+
+                       if (collision(playerProjektileList.ElementAt(i).getProjektileRekt(), enemyList.ElementAt(k).getEnemyRect()))
+                       {
+                           playerProjektileList.RemoveAt(i);
+                           enemyList.ElementAt(k).life--;
+
+                           if (enemyList.ElementAt(k).life == 0)
+                           {
+                               enemyList.RemoveAt(k);
+                           }
+                           break;
+                       }
+              
                }
                if (collision(liste.ElementAt(i).getProjektileRekt(), enemy2.getEnemyRect()))
                {
@@ -135,16 +182,22 @@ namespace _2D_Projekt
         {
             map.draw(win);
             
-            if (liste.Count != 0)
+            if (playerProjektileList.Count != 0)
             {
-                for (int i = 0; i <= liste.Count - 1; i++)
+                for (int i = 0; i <= playerProjektileList.Count - 1; i++)
                 {
-                    liste.ElementAt(i).draw(win);
+                    playerProjektileList.ElementAt(i).draw(win);
                 }
             }
             player.draw(win);
-            enemy1.draw(win);
-            enemy2.draw(win);
+
+            // drawn von enemies
+            for (int i = 0; i < enemyList.Count; i++)
+            {
+                enemyList.ElementAt(i).draw(win);
+            }
+
+
             win.Display();
            
         }

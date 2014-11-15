@@ -64,7 +64,7 @@ namespace _2D_Projekt
             sPosition = startPosition;
             direction = _direction;
             projektSprite.Position = position;
-            projektSprite.Scale = new Vector2f(1, 1);
+            projektSprite.Scale = new Vector2f(1, 1); // 1, 1
         }
 
         // draw 
@@ -75,7 +75,7 @@ namespace _2D_Projekt
         }
 
         // Berechnung der Flugbahn  unter einbeziehen von Schusstempo und Range
-        public List<Projektile> update(List<Projektile> list, int i , int speed , int Range , Map map , FollowerE foe)
+        public List<Projektile> update(List<Projektile> list, int i , int speed , int Range , Map map)
         {
             Vector2f wallCollisionTest = new Vector2f(position.X + (direction.X * speed), position.Y + (direction.Y * speed));
 
