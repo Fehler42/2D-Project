@@ -38,18 +38,28 @@ namespace _2D_Projekt
 
         // Enemy Stuff
         static List<dynamic> enemyList;
-        static int[] enemies = { 1, 1, 2, 2 };
-        static int enemyListcount  = 0;
+        static int[,] enemies = { {1,100,200}
+                                , {1,200,300},
+                                  {2,600,550},
+                                  {2,300,500}};
 
         static int FireRateCounter = 0;
+
+        // Epic loot 
+        static List<PowerUp> powerup;
+        static bool LootTaken = false;
+        static Random Rnd;
+        static int powerupKind;
+
         static void initialize()
         {
             player = new Player();
             map = new Map();
             playerProjektileList = new List<Projektile>();
             enemyList = new List<dynamic>();
-            //enemy1 = new FollowerE();
-            //enemy2 = new Charger();
+            powerup = new List<PowerUp>();
+            Rnd = new Random();
+            powerupKind = Rnd.Next(1,6);
 
 
 
@@ -62,15 +72,15 @@ namespace _2D_Projekt
         static void loadContent()
         {
 
-            for (int i = 0; i < enemies.Length; i++)
+            for (int i = 0; i < enemies.GetLength(0); i++)
             {
-                if (enemies[i] == 1)
+                if (enemies[i,0] == 1)
                 {
-                    enemyList.Add(new FollowerE());
+                    enemyList.Add(new FollowerE(enemies[i,1],enemies[i,2]));
                 }
-                if (enemies[i] == 2)
+                if (enemies[i,0] == 2)
                 {
-                    enemyList.Add(new Charger());
+                    enemyList.Add(new Charger(enemies[i, 1], enemies[i, 2]));
                 }
             }
 
@@ -116,10 +126,13 @@ namespace _2D_Projekt
            }
 
             // Kollisionsabfrage mit Lebensverlust
+<<<<<<< HEAD
 
             // mit Trefern
            if ((collision(player.getplayerRect(), enemy1.getEnemyRect()) && player.protectedTime <= 0) || (collision(player.getplayerRect(), enemy2.getEnemyRect()) && player.protectedTime <= 0))
 
+=======
+>>>>>>> c17fc0e6ced95ab8307126577065c39cc5de448c
             // mit Treffern
            for (int i = 0; i < enemyList.Count; i++)
 
@@ -133,12 +146,16 @@ namespace _2D_Projekt
            player.protectedTime--;
 
 
+<<<<<<< HEAD
 
             // Projektil mit Gegnerkontakt
            for (int i = 0; i < liste.Count; i++)
 
 
             // Projektil mit Gegnerkontakt entfernen von Feinden 
+=======
+            // Projektil mit Gegnerkontakt, Feind schaden und entfernen von Feinden 
+>>>>>>> c17fc0e6ced95ab8307126577065c39cc5de448c
            for (int i = 0; i < playerProjektileList.Count; i++)
 
 
@@ -161,26 +178,32 @@ namespace _2D_Projekt
                        }
               
                }
-               if (collision(liste.ElementAt(i).getProjektileRekt(), enemy2.getEnemyRect()))
-               {
-                   liste.RemoveAt(i);
-                   enemy2.life--;
-                   if (enemy2.life == 0)
-                   {
-                       Console.WriteLine(" Du hast mich erwischt");
-                   }
-               }
+
 
            }
 
+           if (enemyList.Count == 0 && LootTaken== false)
+           {
+               powerup.Add(new PowerUp(powerupKind));
+
+               if (collision(player.getplayerRect(), powerup.ElementAt(0).getPowerUpRect()))
+               {
+                   powerup.ElementAt(0).giveThePower(player);
+                   LootTaken = true;
+               }
+     
+           }
+
+
         }
+
 
         // Aktualisieren der Sprites im Fenster
 
         static void draw(RenderWindow win)
         {
             map.draw(win);
-            
+            // draw Projektiles of Player
             if (playerProjektileList.Count != 0)
             {
                 for (int i = 0; i <= playerProjektileList.Count - 1; i++)
@@ -190,14 +213,28 @@ namespace _2D_Projekt
             }
             player.draw(win);
 
+          
+
             // drawn von enemies
             for (int i = 0; i < enemyList.Count; i++)
             {
                 enemyList.ElementAt(i).draw(win);
             }
 
+            // draw PowerUp
+            if (powerup.Count != 0)
+            {
+                powerup.ElementAt(0).draw(win);
+                powerup.RemoveAt(0);
+            }
 
-            win.Display();
+
+
+
+
+
+                win.Display();
+ 
            
         }
         // Kollisionsabfrage über Rechtecke
