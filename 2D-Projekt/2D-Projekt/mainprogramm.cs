@@ -19,6 +19,15 @@ namespace _2D_Projekt
             // Achte darauf, ob Fenster geschlossen wird
             win.Closed += win_Closed;
 
+
+                
+                while (!(Keyboard.IsKeyPressed(Keyboard.Key.Space)))
+                {
+                    win.Draw(new Sprite(new Texture("pictures/startscreen.png")));
+                    win.Display();
+                }
+
+
             initialize();
             loadContent();
 
@@ -28,8 +37,9 @@ namespace _2D_Projekt
                 // Schauen ob Fenster geschlossen werden soll
                 win.DispatchEvents();
                 // Positionsupdate aller Figuren 
-                update();
+                update(win);
                 draw(win);
+
             }
         }
 
@@ -118,8 +128,14 @@ namespace _2D_Projekt
 
         // Updatefunktion
 
-        static void update()
+        static void update( RenderWindow win)
         {
+            // Überprüfung Tod des Spielers
+            if (player.life == 0)
+            {
+                deadPlayer(win);
+            }
+
            player.update(map);
 
             // Berechnet die Bewegung der Gegner in Abhängigkeit der Spielerposition
@@ -302,6 +318,27 @@ namespace _2D_Projekt
             // erlaubt Loot zu nehmen 
             LootTaken = false;
 
+        }
+        // Ende der Funktion
+        //================================================================================================
+        //================================================================================================
+        static void deadPlayer(RenderWindow win)
+        {
+            while (player.life == 0)
+            {
+                win.Draw(new Sprite(new Texture("pictures/gameoverscreen.png")));
+                win.Display();
+                if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
+                {
+                    player.life = 3;
+                    initialize();
+                    loadContent();
+                }
+                while (Keyboard.IsKeyPressed(Keyboard.Key.Space))
+                {
+
+                }
+            }
         }
         // Ende der Funktion
         //================================================================================================

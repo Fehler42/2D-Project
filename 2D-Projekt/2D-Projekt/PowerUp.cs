@@ -66,7 +66,7 @@ namespace _2D_Projekt
             {
                 player.shotRange = player.shotRange + 50;
             }
-            if (kind == 2)
+            if (kind == 2 )
             {
                 player.life++;
             }
@@ -80,11 +80,10 @@ namespace _2D_Projekt
             }
             if (kind == 5)
             {
-                player.fireRate = player.fireRate - 2;
-                if (player.fireRate <= 0)
+                if (player.fireRate >= 3)
                 {
-                    player.fireRate = 1;
-                }
+                    player.fireRate = player.fireRate - 2;
+                }               
             }
 
         }
