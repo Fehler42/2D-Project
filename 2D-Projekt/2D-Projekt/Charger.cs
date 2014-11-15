@@ -15,6 +15,7 @@ namespace _2D_Projekt
         Vector2f position;
         public int life = 1;
 
+
         // Constructor
         public Charger(int x , int y)
         {

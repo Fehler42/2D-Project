@@ -120,6 +120,7 @@ namespace _2D_Projekt
             // Kollisionsabfrage mit Lebensverlust
             // mit Treffern
            for (int i = 0; i < enemyList.Count; i++)
+
            {
                if (collision(player.getplayerRect(), enemyList.ElementAt(i).getEnemyRect()) && player.protectedTime <= 0)
                {
@@ -130,9 +131,9 @@ namespace _2D_Projekt
            player.protectedTime--;
 
 
-
             // Projektil mit Gegnerkontakt entfernen von Feinden 
            for (int i = 0; i < playerProjektileList.Count; i++)
+
 
            {
 
@@ -154,16 +155,18 @@ namespace _2D_Projekt
               
                }
 
+
            }
 
         }
+
 
         // Aktualisieren der Sprites im Fenster
 
         static void draw(RenderWindow win)
         {
             map.draw(win);
-            
+            // draw Projektiles of Player
             if (playerProjektileList.Count != 0)
             {
                 for (int i = 0; i <= playerProjektileList.Count - 1; i++)
