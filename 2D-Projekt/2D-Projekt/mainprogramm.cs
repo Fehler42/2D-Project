@@ -48,6 +48,8 @@ namespace _2D_Projekt
         // Epic loot 
         static List<PowerUp> powerup;
         static bool LootTaken = false;
+        static Random Rnd;
+        static int powerupKind;
 
         static void initialize()
         {
@@ -56,7 +58,8 @@ namespace _2D_Projekt
             playerProjektileList = new List<Projektile>();
             enemyList = new List<dynamic>();
             powerup = new List<PowerUp>();
-            
+            Rnd = new Random();
+            powerupKind = Rnd.Next(1,6);
 
 
 
@@ -165,12 +168,11 @@ namespace _2D_Projekt
 
            if (enemyList.Count == 0 && LootTaken== false)
            {
-               powerup.Add(new PowerUp(2));
+               powerup.Add(new PowerUp(powerupKind));
 
                if (collision(player.getplayerRect(), powerup.ElementAt(0).getPowerUpRect()))
                {
                    powerup.ElementAt(0).giveThePower(player);
-                   //powerup.RemoveAt(0);
                    LootTaken = true;
                }
      

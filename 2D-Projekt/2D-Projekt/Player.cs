@@ -14,7 +14,7 @@ namespace _2D_Projekt
         Sprite playerSprite;
         public Vector2f playerPosition;
         FloatRect playerRect;
-        float speed = 3 ;//3
+        public float speed = 3 ;//3
         public int fireRate = 20; // 20
         public int shotSpeed = 3; // 3
         public int shotRange = 150;// 150
