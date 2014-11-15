@@ -14,10 +14,10 @@ namespace _2D_Projekt
         Sprite playerSprite;
         public Vector2f playerPosition;
         FloatRect playerRect;
-        float speed = 3;
-        public int fireRate = 20;
-        public int shotSpeed = 3;
-        public int shotRange = 150;
+        float speed = 3 ;//3
+        public int fireRate = 20; // 20
+        public int shotSpeed = 3; // 3
+        public int shotRange = 150;// 150
 
 
         // Variablen für Lebensanzeige

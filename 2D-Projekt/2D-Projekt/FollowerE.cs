@@ -21,7 +21,7 @@ namespace _2D_Projekt
         {
             Texture playerTexture = new Texture("pictures/follower.png");
             enemySprite = new Sprite(playerTexture);
-            position = new Vector2f(200, 400);
+            position = new Vector2f(200, 500);
             enemySprite.Position = position;
             enemySprite.Scale = new Vector2f(0.5f, 0.5f);
         }
