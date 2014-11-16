@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Charger.cs" />
+    <Compile Include="Feared.cs" />
     <Compile Include="FollowerE.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="PowerUp.cs" />
@@ -86,6 +87,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="pictures\charger.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pictures\feared.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="pictures\firerate.png">

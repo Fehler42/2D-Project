@@ -54,7 +54,7 @@ namespace _2D_Projekt
 
         // Enemy Stuff
         static List<dynamic> enemyList;
-        static int[,] enemies = { {1,100,200}
+        static int[,] enemies = { {3,100,200}
                                 , {1,200,300},
                                   {2,600,550},
                                   {2,300,500}};
@@ -115,6 +115,10 @@ namespace _2D_Projekt
                 {
                     enemyList.Add(new Charger(enemies[i, 1], enemies[i, 2]));
                 }
+                if (enemies[i, 0] == 3)
+                {
+                    enemyList.Add(new Feared(enemies[i, 1], enemies[i, 2]));
+                }
             }
 
         }
@@ -139,7 +143,7 @@ namespace _2D_Projekt
             // Berechnet die Bewegung der Gegner in Abhängigkeit der Spielerposition
            for (int i = 0; i < enemyList.Count; i++)
            {
-               enemyList.ElementAt(i).update(player.playerPosition);
+               enemyList.ElementAt(i).update(player.playerPosition , map);
            }
 
           

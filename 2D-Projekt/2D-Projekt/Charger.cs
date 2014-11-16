@@ -43,7 +43,7 @@ namespace _2D_Projekt
         //================================================================================================
 
         // Berechnet den direkten Weg zum Player und initialisiert den Charge ( Wände werden ignoriert)
-        public void update(Vector2f destination)
+        public void update(Vector2f destination , Map map)
         {
             int xcharge = 1, ycharge = 1;
             //Skalar das den Vektor auf die Länge 1 kürzen kann
