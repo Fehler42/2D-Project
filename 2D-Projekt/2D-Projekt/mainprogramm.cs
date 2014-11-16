@@ -55,11 +55,15 @@ namespace _2D_Projekt
         // Enemy Stuff
         static List<dynamic> enemyList;
         static int[,] enemies = { {3,100,200}
-                                , {1,200,300},
+                                , {4,200,300},
                                   {2,600,550},
                                   {2,300,500}};
 
         static int FireRateCounter = 0;
+        // Enemy Projektilliste
+        static List<Projektile> enemyProjektilList;
+        static int enemyfireRateCounter= 0;
+        static int enemyFireRate = 40;
 
         // Epic loot 
         static List<PowerUp> powerup;
@@ -82,7 +86,7 @@ namespace _2D_Projekt
             powerup = new List<PowerUp>();
             Rnd = new Random();
             powerupKind = Rnd.Next(1,6);
-
+            enemyProjektilList = new List<Projektile>();
 
 
         }
@@ -118,6 +122,10 @@ namespace _2D_Projekt
                 if (enemies[i, 0] == 3)
                 {
                     enemyList.Add(new Feared(enemies[i, 1], enemies[i, 2]));
+                }
+                if (enemies[i, 0] == 4)
+                {
+                    enemyList.Add(new Turret(enemies[i, 1], enemies[i, 2]));
                 }
             }
 
@@ -161,17 +169,18 @@ namespace _2D_Projekt
            }
            FireRateCounter++;
 
-            //==========================================================================
-            // Projektilpositionsupdate 
+ 
+               //==========================================================================
+               // Projektilpositionsupdate 
 
-           if (playerProjektileList.Count > 0)
-           {
-               for (int i = 0; i <= playerProjektileList.Count - 1; i++)
+               if (playerProjektileList.Count > 0)
                {
-                   playerProjektileList = playerProjektileList.ElementAt(i).update(playerProjektileList, i, player.shotSpeed, player.shotRange , map);
+                   for (int i = 0; i <= playerProjektileList.Count - 1; i++)
+                   {
+                       playerProjektileList = playerProjektileList.ElementAt(i).update(playerProjektileList, i, player.shotSpeed, player.shotRange, map);
 
+                   }
                }
-           }
 
             //============================================================================
             // Untersucht Kollision mit Gegnern in der Gegnerliste. sorgt für kurze Schutzzeit nach Treffern
@@ -207,20 +216,50 @@ namespace _2D_Projekt
                }
            }
 
-            //=====================================================================================
-            //Sorgt dafür,dass wenn alle Gegner besiegt sind ein Powerup spawnt und beim Aufnehmen das nächste Level gestartet wird 
-
-           if (enemyList.Count == 0 && LootTaken== false)
+           //=============================================================================
+           // Erstellen von Gegnerprojektilen 
+           if (enemyfireRateCounter == enemyFireRate)
            {
-               powerup.Add(new PowerUp(powerupKind));
-
-               if (collision(player.getplayerRect(), powerup.ElementAt(0).getPowerUpRect()))
+               for (int k = 0; k < enemyList.Count; k++)
                {
-                   powerup.ElementAt(0).giveThePower(player);
-                   LootTaken = true;
-                   loadNextLevel();
+                   enemyProjektilList = enemyList.ElementAt(k).shoot(enemyProjektilList, player.playerPosition);
+               }
+               enemyfireRateCounter = 0;
+
+           }
+           enemyfireRateCounter++;
+            //=================================================================================
+            // Projektil Positionsupdate
+           for (int i = 0; i < enemyProjektilList.Count; i++)
+           {
+               enemyProjektilList = enemyProjektilList.ElementAt(i).update(enemyProjektilList, i, map);
+           }
+           //=================================================================================
+           // Kollisionscheck zwischen Spieler und den Gegnerprojektilen 
+           for (int i = 0; i < enemyProjektilList.Count; i++)
+           {
+               if (collision(player.getplayerRect(), enemyProjektilList.ElementAt(i).getProjektileRekt()))
+               {
+                   player.life--;
+                   enemyProjektilList.RemoveAt(i);
                }
            }
+
+
+               //=====================================================================================
+               //Sorgt dafür,dass wenn alle Gegner besiegt sind ein Powerup spawnt und beim Aufnehmen das nächste Level gestartet wird 
+
+               if (enemyList.Count == 0 && LootTaken == false)
+               {
+                   powerup.Add(new PowerUp(powerupKind));
+
+                   if (collision(player.getplayerRect(), powerup.ElementAt(0).getPowerUpRect()))
+                   {
+                       powerup.ElementAt(0).giveThePower(player);
+                       LootTaken = true;
+                       loadNextLevel();
+                   }
+               }
         }
 
         // Ende der Funktion
@@ -264,6 +303,12 @@ namespace _2D_Projekt
                 powerup.RemoveAt(0);
                 
             }
+            // ============================================================
+            // Gegnerprojektile
+
+            for( int i = 0 ; i < enemyProjektilList.Count ; i ++){
+                enemyProjektilList.ElementAt(i).draw(win);
+            }
 
             //=================================================
             //Zeigt alles an 
@@ -305,7 +350,7 @@ namespace _2D_Projekt
            
 
             // Enemies für das nächste Level (Erklärung am Ende)
-            int enemyvoting = Rnd.Next(1, 4);
+            int enemyvoting = Rnd.Next(1, 5);
 
             if(enemyvoting==1)
             enemies = new int[,] { { 1, 100, 450 }, { 1, 350, 450 }, { 1, 400, 450 }, { 1, 700, 450 }, { 1, 100, 300 }, { 1, 650, 300 }, { 1, 100, 250 }, { 1, 650, 250 }, { 1, 100, 100 }, { 1, 350, 100 }, { 1, 400, 100 }, { 1, 650, 100 } };
@@ -313,6 +358,8 @@ namespace _2D_Projekt
             enemies = new int[,] { { 1, 100, 200 }, { 1, 200, 300 }, { 2, 600, 550 }, { 2, 300, 500 } };
             if(enemyvoting==3)
             enemies = new int[,] { { 2, 100, 100 }, { 2, 650, 100 }, { 2, 100, 450 }, { 2, 650, 450 } };
+            if (enemyvoting == 4 && mapvoting != 2)
+            enemies = new int[,] { { 4, 200, 300 }, { 4, 550, 300 }, { 3, 425, 100 }, { 3, 425, 500 } };
             // variable für das n#chste PowerUp
             powerupKind = Rnd.Next(1, 6);
             // Laden der Gegner
@@ -348,7 +395,10 @@ namespace _2D_Projekt
     }
 }
 /******************************************************************
-if(enemyvoting==3)
+ * Leitfaden zur Erstellung von Gegnerkombinationen 
+ * ---------------------------------------------------
+
+ * if(enemyvoting==3)
             enemies = new int[,] { { 2, 100, 100 }, { 2, 650, 100 }, { 2, 100, 450 }, { 2, 650, 450 } };
  * 
  * Regeln für die Erstellung von Gegnerkombinationen :
@@ -363,3 +413,81 @@ if(enemyvoting==3)
  * neue Liste unter if Abfrage mit erhöhtem enemyvoting
  * int enemyvoting = Rnd.Next(1, X); X ein höher als das höchste Enemyvoting setzen
 ******************************************************************/
+
+/**********************************************************************
+ * Leitfaden zur Gegnererstellung:
+ * --------------------------------------
+ * Für jeden Gegner eine neue Klasse erstellen.
+ * Die Klasse muss folgende Funktionen und Variablen enthalten :
+ * 
+ *       // Variablen
+        Sprite enemySprite = new Sprite();
+        Vector2f position;
+        public int life = 3;
+ * 
+ *      // Bei Gegnern mit Schüssen 
+        int shotspeed = 1;
+        int range = 200;
+ 
+        // Constructor
+        public Turret(int x , int y)
+        {
+            Texture playerTexture = new Texture("pictures/turret.png");
+            enemySprite = new Sprite(playerTexture);
+            position = new Vector2f(x, y);
+            enemySprite.Position = position;
+            enemySprite.Scale = new Vector2f(0.5f, 0.5f);
+        }
+
+        // draw
+        public void draw(RenderWindow win)
+        {
+            win.Draw(enemySprite);
+        }
+
+        public void update(Vector2f destination , Map map)
+        {
+ *         // Hier kann ein Bewegungsmuster berechnet erstellt werden. Außerdem kommen Kollisionen mit den Wänden hin
+ *          
+            enemySprite.Position = position;
+        }
+
+        // Ende der Funktion
+        public List<Projektile> shoot(List<Projektile> list,Vector2f playerPosition)
+        {
+ *              // Hier können Gegebenenfalls Projektile übergeben werden , Näheres ist den beiden Constructoren in der Projektilklasse zu entnehmen
+            return list;
+        }
+
+
+
+        // Getter Funktionen  wichtig für Kollisionsabfragen 
+        public FloatRect getEnemyRect()
+        {
+            return new FloatRect(position.X, position.Y, this.getWidth(), this.getHeight());
+        }
+
+        public float getHeight()
+        {
+            return enemySprite.Texture.Size.Y * enemySprite.Scale.Y;
+        }
+
+        public float getWidth()
+        {
+            return enemySprite.Texture.Size.X * enemySprite.Scale.X;
+        }
+        public Vector2f getPosition()
+        {
+            return position;
+        }
+ * 
+ * // Alle aufgeführten Funktionen !!!!!!!!!!!!!!!!!!!müssen !!!!!!!!!!!!!!!!! vorhanden sein da es sonst Probleme mit der Gegnerliste gibt
+ * 
+ * Implementierung:
+ * initialisierungszahl in die Funktion
+ * loadContent() einfügen 
+ * 
+ * in einer Gegnerkombination verwenden 
+ * 
+ * sich über den Feind freuen XD
+**********************************************************************/

@@ -19,14 +19,14 @@ namespace _2D_Projekt
         // Prüffunktion für die Betretbarkeit eines Feldes
         public bool isWalkable(int i, int j)
         {
-            if (tileKind[i, j] == 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+                if (tileKind[i, j] == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
         }
 
         // Ende der Funktion
@@ -141,6 +141,10 @@ namespace _2D_Projekt
 }
 
 /*******************************************************************************
+ * Leitfaden zur Maperstellung
+ * ---------------------------
+ * 
+ * 
             if (mapkind == 3)
             {
                 //                        1,2,3,4,5,6,7,8,9,10,11,12

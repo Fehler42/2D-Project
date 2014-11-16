@@ -15,23 +15,37 @@ namespace _2D_Projekt
         private float speed = 3;
         public int life = 5;
 
+        // Ende der Variablen
+        //================================================================================================
+        //================================================================================================
+
         public Feared(int x , int y)
         {
             position = new Vector2f(x, y);
             sprite.Position = position;
             sprite.Scale = new Vector2f(0.5f, 0.5f);
         }
+
+        // Ende der Funktion
+        //================================================================================================
+        //================================================================================================
+
         public void draw(RenderWindow win)
         {
             win.Draw(sprite);
         }
 
+        // Ende der Funktion
+        //================================================================================================
+        //================================================================================================
+
         public void update(Vector2f Spielerposition, Map map)
         {
-            // Logik für das Laufen des verängstigten einfügen
+            // Differenzvektor und Skalar erstellen, Ursprungsposition merken 
             Vector2f diffSpielerGegner = new Vector2f(position.X - Spielerposition.X, position.Y - Spielerposition.Y);
             float normSkalarDiff = (float)Math.Sqrt((position.X - Spielerposition.X) * (position.X - Spielerposition.X) + (position.Y - Spielerposition.Y) * (position.Y - Spielerposition.Y));
             Vector2f merkPosition = position;
+            // legt den Abstand des Gegners fest 
             if (normSkalarDiff <= 200)
             {
                 position = new Vector2f(position.X + (position.X - Spielerposition.X) * speed / normSkalarDiff, position.Y + (position.Y - Spielerposition.Y) * speed / normSkalarDiff);
@@ -49,8 +63,22 @@ namespace _2D_Projekt
                     position = merkPosition;
                 }
             }
+            // Sprietupdate
             sprite.Position = position;
         }
+
+        // Ende der Funktion
+        //================================================================================================
+        //================================================================================================
+        public List<Projektile> shoot(List<Projektile> list, Vector2f t)
+        {
+            return list;
+        }
+        // Ende der Funktion
+        //================================================================================================
+        //================================================================================================
+
+        // Getterfunktionen
         public FloatRect getEnemyRect()
         {
             return new FloatRect(position.X, position.Y, this.getWidth(), this.getHeight());
@@ -69,5 +97,10 @@ namespace _2D_Projekt
         {
             return position;
         }
+
+
+        // Ende der Getterfunktionen
+        //================================================================================================
+        //================================================================================================
     }
 }
