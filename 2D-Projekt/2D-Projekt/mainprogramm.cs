@@ -23,6 +23,7 @@ namespace _2D_Projekt
                 {
                     win.Draw(new Sprite(new Texture("pictures/startscreen.png")));
                     win.Display();
+                    win.DispatchEvents();
                 }
 
 
@@ -375,6 +376,7 @@ namespace _2D_Projekt
         {
             while (player.life == 0)
             {
+                win.DispatchEvents();
                 win.Draw(new Sprite(new Texture("pictures/gameoverscreen.png")));
                 win.Display();
                 if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
