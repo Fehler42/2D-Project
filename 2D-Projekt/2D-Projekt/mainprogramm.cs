@@ -169,20 +169,18 @@ namespace _2D_Projekt
                }
            }
 
-<<<<<<< HEAD
+
             // Kollisionsabfrage mit Lebensverlust
 
 
-            // mit Trefern
-           if ((collision(player.getplayerRect(), enemy1.getEnemyRect()) && player.protectedTime <= 0) || (collision(player.getplayerRect(), enemy2.getEnemyRect()) && player.protectedTime <= 0))
-
+          
 
             // mit Treffern
-=======
+
             //============================================================================
             // Untersucht Kollision mit Gegnern in der Gegnerliste. sorgt für kurze Schutzzeit nach Treffern
 
->>>>>>> 80dcd622714397de4054f022f6f935ba75a12199
+
            for (int i = 0; i < enemyList.Count; i++)
 
            {
@@ -194,23 +192,22 @@ namespace _2D_Projekt
            }
            player.protectedTime--;
 
-<<<<<<< HEAD
 
 
 
-            // Projektil mit Gegnerkontakt
-           for (int i = 0; i < liste.Count; i++)
+
+           
 
 
             // Projektil mit Gegnerkontakt entfernen von Feinden 
 
             // Projektil mit Gegnerkontakt, Feind schaden und entfernen von Feinden 
 
-=======
+
             //============================================================================================
             // Untersucht Kollision zwischen den Projektilen des Spielers und Gegnern. Zieht ggf. Gegnerleben ab oder entfernt diese
->>>>>>> 80dcd622714397de4054f022f6f935ba75a12199
-           for (int i = 0; i < playerProjektileList.Count; i++)
+
+         for (int i = 0; i < playerProjektileList.Count; i++)
            {
                    for (int k = enemyList.Count - 1; k >= 0; k--)
                    {
