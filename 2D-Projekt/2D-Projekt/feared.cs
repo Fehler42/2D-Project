@@ -8,63 +8,64 @@ using System.Threading.Tasks;
 
 namespace _2D_Projekt
 {
-    class Charger
+    class Feared
     {
-        // Variablen
-        Sprite enemySprite = new Sprite(new Texture("pictures/charger.png"));
+        Sprite sprite = new Sprite(new Texture("pictures/feared.png"));
         Vector2f position;
-        public int life = 1;
+        private float speed = 3;
+        public int life = 5;
 
-        // Ende der Funktion
+        // Ende der Variablen
         //================================================================================================
         //================================================================================================
 
-        // Constructor
-        public Charger(int x , int y)
+        public Feared(int x , int y)
         {
-
             position = new Vector2f(x, y);
-            enemySprite.Position = position;
-            enemySprite.Scale = new Vector2f(0.5f, 0.5f);
+            sprite.Position = position;
+            sprite.Scale = new Vector2f(0.5f, 0.5f);
         }
 
         // Ende der Funktion
         //================================================================================================
         //================================================================================================
 
-        // draw
         public void draw(RenderWindow win)
         {
-            win.Draw(enemySprite);
+            win.Draw(sprite);
         }
 
         // Ende der Funktion
         //================================================================================================
         //================================================================================================
 
-        // Berechnet den direkten Weg zum Player und initialisiert den Charge ( Wände werden ignoriert)
-        public void update(Vector2f destination , Map map)
+        public void update(Vector2f Spielerposition, Map map)
         {
-            int xcharge = 1, ycharge = 1;
-            //Skalar das den Vektor auf die Länge 1 kürzen kann
-            float n = (float)Math.Sqrt((destination.X - position.X) * (destination.X - position.X) + (destination.Y - position.Y) * (destination.Y - position.Y));
-
-                // löst den Charge bei ähnlichen Y Koordinaten aus
-                if ((position.Y - 10 <= destination.Y) && (position.Y + 10 >= destination.Y))
+            // Differenzvektor und Skalar erstellen, Ursprungsposition merken 
+            Vector2f diffSpielerGegner = new Vector2f(position.X - Spielerposition.X, position.Y - Spielerposition.Y);
+            float normSkalarDiff = (float)Math.Sqrt((position.X - Spielerposition.X) * (position.X - Spielerposition.X) + (position.Y - Spielerposition.Y) * (position.Y - Spielerposition.Y));
+            Vector2f merkPosition = position;
+            // legt den Abstand des Gegners fest 
+            if (normSkalarDiff <= 200)
+            {
+                position = new Vector2f(position.X + (position.X - Spielerposition.X) * speed / normSkalarDiff, position.Y + (position.Y - Spielerposition.Y) * speed / normSkalarDiff);
+                if (!map.isWalkable((int)position.X / 50, (int)position.Y / 50) || !map.isWalkable((int)(position.X +this.getWidth())/50 ,(int)(position.Y +this.getHeight())/50))
                 {
-                    xcharge = 5;
+                    position = merkPosition;
                 }
-                // löst den Charge bei ähnlichen x Koordinaten aus 
-                if ((position.X - 10 <= destination.X) && (position.X + 10 >= destination.X))
-                {
-                    ycharge = 5;
-                }
-          // Versetzt den Sprite 
-          position = new Vector2f(position.X + (destination.X - position.X) * xcharge / n, position.Y + (destination.Y - position.Y) * ycharge / n);
-          //  Spritepositionsupdate 
-          enemySprite.Position = position;
+            }
+            else
+            {
+                position = new Vector2f(position.X - (position.X - Spielerposition.X) * speed / normSkalarDiff, position.Y - (position.Y - Spielerposition.Y) * speed / normSkalarDiff);
 
-       }
+                if (!map.isWalkable((int)position.X / 50, (int)position.Y / 50) || !map.isWalkable((int)(position.X + this.getWidth()) / 50, (int)(position.Y + this.getHeight()) / 50))
+                {
+                    position = merkPosition;
+                }
+            }
+            // Sprietupdate
+            sprite.Position = position;
+        }
 
         // Ende der Funktion
         //================================================================================================
@@ -77,8 +78,7 @@ namespace _2D_Projekt
         //================================================================================================
         //================================================================================================
 
-        // GetterFunktionen
-
+        // Getterfunktionen
         public FloatRect getEnemyRect()
         {
             return new FloatRect(position.X, position.Y, this.getWidth(), this.getHeight());
@@ -86,15 +86,20 @@ namespace _2D_Projekt
 
         public float getHeight()
         {
-            return enemySprite.Texture.Size.Y * enemySprite.Scale.Y;
+            return sprite.Texture.Size.Y * sprite.Scale.Y;
         }
 
         public float getWidth()
         {
-            return enemySprite.Texture.Size.X * enemySprite.Scale.X;
+            return sprite.Texture.Size.X * sprite.Scale.X;
+        }
+        public Vector2f getPosition()
+        {
+            return position;
         }
 
-        // Ende der Getterfunktion
+
+        // Ende der Getterfunktionen
         //================================================================================================
         //================================================================================================
     }

@@ -45,7 +45,7 @@ namespace _2D_Projekt
         //================================================================================================
 
         // Berechnet den direkten Weg zum Player ( Wände werden ignoriert)
-        public void update(Vector2f destination)
+        public void update(Vector2f destination , Map map)
         {
             //Skalar das den Vektor auf die Länge 1 kürzen kann
             float n =(float) Math.Sqrt((destination.X- position.X) *(destination.X- position.X) + (destination.Y- position.Y) *(destination.Y- position.Y));
@@ -55,6 +55,13 @@ namespace _2D_Projekt
             enemySprite.Position = position;
         }
 
+        // Ende der Funktion
+        //================================================================================================
+        //================================================================================================
+        public List<Projektile> shoot(List<Projektile> list , Vector2f t)
+        {
+            return list;
+        }
         // Ende der Funktion
         //================================================================================================
         //================================================================================================

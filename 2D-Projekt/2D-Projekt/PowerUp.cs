@@ -80,9 +80,11 @@ namespace _2D_Projekt
             }
             if (kind == 5)
             {
-                if (player.fireRate >= 3)
+                player.fireRate = player.fireRate - 2;
+
+                if (player.fireRate <= 1)
                 {
-                    player.fireRate = player.fireRate - 2;
+                    player.fireRate = 2;
                 }               
             }
 
