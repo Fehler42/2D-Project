@@ -18,11 +18,11 @@ namespace _2D_Projekt
             win.SetFramerateLimit(45);
             // Achte darauf, ob Fenster geschlossen wird
             win.Closed += win_Closed;
+            win.Draw(new Sprite(new Texture("pictures/startscreen.png")));
+            win.Display();
             // Startscreen 
                 while (!(Keyboard.IsKeyPressed(Keyboard.Key.Space)))
                 {
-                    win.Draw(new Sprite(new Texture("pictures/startscreen.png")));
-                    win.Display();
                     win.DispatchEvents();
                 }
 
@@ -374,11 +374,12 @@ namespace _2D_Projekt
         //================================================================================================
         static void deadPlayer(RenderWindow win)
         {
+            win.Draw(new Sprite(new Texture("pictures/gameoverscreen.png")));
+            win.Display();
             while (player.life == 0)
             {
                 win.DispatchEvents();
-                win.Draw(new Sprite(new Texture("pictures/gameoverscreen.png")));
-                win.Display();
+               
                 if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
                 {
                     player.life = 3;
