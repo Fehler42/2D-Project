@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Charger.cs" />
     <Compile Include="Feared.cs" />
+    <Compile Include="flyingTurret.cs" />
     <Compile Include="FollowerE.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="PowerUp.cs" />

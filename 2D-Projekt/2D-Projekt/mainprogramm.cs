@@ -19,10 +19,12 @@ namespace _2D_Projekt
             // Achte darauf, ob Fenster geschlossen wird
             win.Closed += win_Closed;
             // Startscreen 
+            win.Draw(new Sprite(new Texture("pictures/startscreen.png")));
+            win.Display();
+
                 while (!(Keyboard.IsKeyPressed(Keyboard.Key.Space)))
                 {
-                    win.Draw(new Sprite(new Texture("pictures/startscreen.png")));
-                    win.Display();
+                    
                     win.DispatchEvents();
                 }
 
@@ -57,7 +59,7 @@ namespace _2D_Projekt
         static List<dynamic> enemyList;
         static int[,] enemies = { {3,100,200}
                                 , {4,200,300}, 
-                                  {2,600,550},
+                                  {5,600,550},
                                   {2,300,500}};
 
         static int FireRateCounter = 0;
@@ -127,6 +129,10 @@ namespace _2D_Projekt
                 if (enemies[i, 0] == 4)
                 {
                     enemyList.Add(new Turret(enemies[i, 1], enemies[i, 2]));
+                }
+                if (enemies[i, 0] == 5)
+                {
+                    enemyList.Add(new flyingTurret(enemies[i, 1], enemies[i, 2]));
                 }
             }
 
