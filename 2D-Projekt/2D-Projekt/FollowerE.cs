@@ -23,8 +23,8 @@ namespace _2D_Projekt
         // Constructor
         public FollowerE(int x , int y)
         {
-            Texture playerTexture = new Texture("pictures/follower.png");
-            enemySprite = new Sprite(playerTexture);
+            Texture enemyTexture = new Texture("pictures/follower.png");
+            enemySprite = new Sprite(enemyTexture);
             position = new Vector2f(x, y);
             enemySprite.Position = position;
             enemySprite.Scale = new Vector2f(0.5f, 0.5f);

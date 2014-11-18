@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bouncer.cs" />
     <Compile Include="Charger.cs" />
     <Compile Include="Feared.cs" />
     <Compile Include="FollowerE.cs" />
@@ -79,6 +80,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="openal32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pictures\bouncer.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="pictures\bull.png">
