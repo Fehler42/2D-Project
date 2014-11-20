@@ -8,8 +8,7 @@ neue Gegnertypen :
 	Charger ( auf ebene mit spieler -> Schneller , sonst random) /done
 	tower ( schieﬂt von einer Position auf den Spieler) /done
 enemys verschwinden wenn sie am start von links auf dich treffen /fixed
-
-
+manchmal kann man nach powerUp nicht mehr schieﬂen
 
 
 
