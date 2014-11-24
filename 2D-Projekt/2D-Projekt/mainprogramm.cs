@@ -26,10 +26,7 @@ namespace _2D_Projekt
 
                 while (!(Keyboard.IsKeyPressed(Keyboard.Key.Space)))
                 {
-<<<<<<< HEAD
-                    
-=======
->>>>>>> 6ecd095d45ad770d89c325e2842885de4f06181f
+
                     win.DispatchEvents();
                 }
 
@@ -62,16 +59,11 @@ namespace _2D_Projekt
 
         // Enemy Stuff
         static List<dynamic> enemyList;
-        static int[,] enemies = { {3,100,200}
-<<<<<<< HEAD
-                                , {4,200,300}, 
-                                  {5,600,550},
-                                  {2,300,500}};
-=======
-                                , {4,200,300},
+        static int[,] enemies = { {3,100,200},
+                                  {4,200,300},
                                   {3,600,550},
-                                  {7,200,300}};
->>>>>>> 6ecd095d45ad770d89c325e2842885de4f06181f
+                                  {6,200,300}};
+
 
         static int FireRateCounter = 0;
         // Enemy Projektilliste
@@ -125,11 +117,11 @@ namespace _2D_Projekt
 
             for (int i = 0; i < enemies.GetLength(0); i++)
             {
-                if (enemies[i,0] == 1)
+                if (enemies[i, 0] == 1)
                 {
-                    enemyList.Add(new FollowerE(enemies[i,1],enemies[i,2]));
+                    enemyList.Add(new FollowerE(enemies[i, 1], enemies[i, 2]));
                 }
-                if (enemies[i,0] == 2)
+                if (enemies[i, 0] == 2)
                 {
                     enemyList.Add(new Charger(enemies[i, 1], enemies[i, 2]));
                 }
@@ -141,22 +133,23 @@ namespace _2D_Projekt
                 {
                     enemyList.Add(new Turret(enemies[i, 1], enemies[i, 2]));
                 }
-<<<<<<< HEAD
+
                 if (enemies[i, 0] == 5)
                 {
                     enemyList.Add(new flyingTurret(enemies[i, 1], enemies[i, 2]));
-=======
-                if (enemies[i, 0] == 6)
-                {
-                    enemyList.Add(new Bouncer(enemies[i, 1], enemies[i, 2]));
                 }
-                if (enemies[i, 0] == 7)
-                {
-                    enemyList.Add(new TurretBouncer(enemies[i, 1], enemies[i, 2]));
->>>>>>> 6ecd095d45ad770d89c325e2842885de4f06181f
-                }
-            }
+                    if (enemies[i, 0] == 6)
+                    {
+                        enemyList.Add(new Bouncer(enemies[i, 1], enemies[i, 2]));
+                    }
+                    if (enemies[i, 0] == 7)
+                    {
+                        enemyList.Add(new TurretBouncer(enemies[i, 1], enemies[i, 2]));
 
+                    }
+                
+
+            }
         }
 
 
