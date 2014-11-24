@@ -62,7 +62,7 @@ namespace _2D_Projekt
         static int[,] enemies = { {3,100,200},
                                   {4,200,300},
                                   {3,600,550},
-                                  {6,200,300}};
+                                  {7,200,300}};
 
 
         static int FireRateCounter = 0;
@@ -162,7 +162,7 @@ namespace _2D_Projekt
         static void update( RenderWindow win)
         {
             // Überprüfung Tod des Spielers
-            if (player.life == 0)
+            if (player.life <= 0)
             {
                 deadPlayer(win);
             }
