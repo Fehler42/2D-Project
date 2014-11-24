@@ -18,13 +18,18 @@ namespace _2D_Projekt
             win.SetFramerateLimit(45);
             // Achte darauf, ob Fenster geschlossen wird
             win.Closed += win_Closed;
+            win.Draw(new Sprite(new Texture("pictures/startscreen.png")));
+            win.Display();
             // Startscreen 
             win.Draw(new Sprite(new Texture("pictures/startscreen.png")));
             win.Display();
 
                 while (!(Keyboard.IsKeyPressed(Keyboard.Key.Space)))
                 {
+<<<<<<< HEAD
                     
+=======
+>>>>>>> 6ecd095d45ad770d89c325e2842885de4f06181f
                     win.DispatchEvents();
                 }
 
@@ -58,9 +63,15 @@ namespace _2D_Projekt
         // Enemy Stuff
         static List<dynamic> enemyList;
         static int[,] enemies = { {3,100,200}
+<<<<<<< HEAD
                                 , {4,200,300}, 
                                   {5,600,550},
                                   {2,300,500}};
+=======
+                                , {4,200,300},
+                                  {3,600,550},
+                                  {7,200,300}};
+>>>>>>> 6ecd095d45ad770d89c325e2842885de4f06181f
 
         static int FireRateCounter = 0;
         // Enemy Projektilliste
@@ -130,9 +141,19 @@ namespace _2D_Projekt
                 {
                     enemyList.Add(new Turret(enemies[i, 1], enemies[i, 2]));
                 }
+<<<<<<< HEAD
                 if (enemies[i, 0] == 5)
                 {
                     enemyList.Add(new flyingTurret(enemies[i, 1], enemies[i, 2]));
+=======
+                if (enemies[i, 0] == 6)
+                {
+                    enemyList.Add(new Bouncer(enemies[i, 1], enemies[i, 2]));
+                }
+                if (enemies[i, 0] == 7)
+                {
+                    enemyList.Add(new TurretBouncer(enemies[i, 1], enemies[i, 2]));
+>>>>>>> 6ecd095d45ad770d89c325e2842885de4f06181f
                 }
             }
 
@@ -402,11 +423,12 @@ namespace _2D_Projekt
         //================================================================================================
         static void deadPlayer(RenderWindow win)
         {
+            win.Draw(new Sprite(new Texture("pictures/gameoverscreen.png")));
+            win.Display();
             while (player.life == 0)
             {
                 win.DispatchEvents();
-                win.Draw(new Sprite(new Texture("pictures/gameoverscreen.png")));
-                win.Display();
+               
                 if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
                 {
                     player.life = 3;
