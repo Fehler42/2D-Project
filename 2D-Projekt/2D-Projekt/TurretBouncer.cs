@@ -142,10 +142,10 @@ namespace _2D_Projekt
         //================================================================================================
         public List<Projektile> shoot(List<Projektile> list , Vector2f t)
         {
-            list.Add(new Projektile(new Vector2f(-0.5f,-0.5f), position, shotspeed, range));
-            list.Add(new Projektile(new Vector2f(0.5f, -0.5f), position, shotspeed, range));
-            list.Add(new Projektile(new Vector2f(-0.5f, 0.5f), position, shotspeed, range));
-            list.Add(new Projektile(new Vector2f(0.5f, 0.5f), position, shotspeed, range));
+            list.Add(new Projektile(new Vector2f(-1,-1), position, shotspeed, range));
+            list.Add(new Projektile(new Vector2f(1, 1), position, shotspeed, range));
+            list.Add(new Projektile(new Vector2f(-1, 1), position, shotspeed, range));
+            list.Add(new Projektile(new Vector2f(1,1), position, shotspeed, range));
             return list;
         }
         // Ende der Funktion

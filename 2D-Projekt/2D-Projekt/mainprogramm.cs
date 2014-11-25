@@ -59,10 +59,7 @@ namespace _2D_Projekt
 
         // Enemy Stuff
         static List<dynamic> enemyList;
-        static int[,] enemies = { {3,100,200},
-                                  {4,200,300},
-                                  {3,600,550},
-                                  {7,200,300}};
+        static int[,] enemies = {{1,200,300}};
 
 
         static int FireRateCounter = 0;
@@ -133,20 +130,24 @@ namespace _2D_Projekt
                 {
                     enemyList.Add(new Turret(enemies[i, 1], enemies[i, 2]));
                 }
-
                 if (enemies[i, 0] == 5)
                 {
                     enemyList.Add(new flyingTurret(enemies[i, 1], enemies[i, 2]));
                 }
-                    if (enemies[i, 0] == 6)
-                    {
-                        enemyList.Add(new Bouncer(enemies[i, 1], enemies[i, 2]));
-                    }
-                    if (enemies[i, 0] == 7)
-                    {
-                        enemyList.Add(new TurretBouncer(enemies[i, 1], enemies[i, 2]));
+                if (enemies[i, 0] == 6)
+                {
+                    enemyList.Add(new Bouncer(enemies[i, 1], enemies[i, 2]));
+                }
+                if (enemies[i, 0] == 7)
+                {
+                    enemyList.Add(new TurretBouncer(enemies[i, 1], enemies[i, 2]));
 
-                    }
+                }
+                if (enemies[i, 0] == 8)
+                {
+                    enemyList.Add(new Boss(enemies[i, 1], enemies[i, 2]));
+
+                }
                 
 
             }

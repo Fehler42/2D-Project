@@ -13,10 +13,11 @@ namespace _2D_Projekt
         // Klassenvariablen
         Sprite playerSprite;
         public Vector2f playerPosition;
+        int ueberStandCounter = 0;
 
         // Wichtige public Variablen für den  Player . In Kommentaren befinden sich passable Standartwerte
 
-        public float speed = 3 ;//3
+        public int speed = 3 ;//3
         public int fireRate = 20; // 20
         public int shotSpeed = 3; // 3
         public int shotRange = 150;// 150
@@ -91,10 +92,23 @@ namespace _2D_Projekt
             bool leftwalkable = map.isWalkable((int)(this.getPosition().X - speed) / 50,(int)(this.getPosition().Y) / 50) &&
                                 map.isWalkable((int)(this.getPosition().X -speed) / 50,(int)(this.getPosition().Y + this.getHeight()) / 50);
 
+            bool leftwalkable2 =  map.isWalkable((int)(this.getPosition().X - speed) / 50, (int)(this.getPosition().Y + 20) / 50);
+
+            bool rightwalkable2 =  map.isWalkable((int)(this.getPosition().X + (int)this.getWidth() + speed) / 50, (int)(this.getPosition().Y + 20) / 50);
+
+            bool upwalkable2 = map.isWalkable((int)(this.getPosition().X) / 50, (int)(this.getPosition().Y - speed +20) / 50) &&
+                              map.isWalkable((int)(this.getPosition().X + this.getWidth()) / 50, (int)(this.getPosition().Y - speed+20) / 50);
+
+
 
             // Aktualisierung der Bewegung
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.Up) && upwalkable)
+            {
+                playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - speed);
+
+            }
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Up) && !upwalkable && upwalkable2)
             {
                 playerPosition = new Vector2f(playerPosition.X, playerPosition.Y - speed);
             }
@@ -106,7 +120,15 @@ namespace _2D_Projekt
             {
                 playerPosition = new Vector2f(playerPosition.X + speed, playerPosition.Y);
             }
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Right) && !rightwalkable  && rightwalkable2)
+            {
+                playerPosition = new Vector2f(playerPosition.X + speed, playerPosition.Y);
+            }
             if (Keyboard.IsKeyPressed(Keyboard.Key.Left) && leftwalkable)
+            {
+                playerPosition = new Vector2f(playerPosition.X - speed, playerPosition.Y);
+            }
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Left) && !leftwalkable && leftwalkable2)
             {
                 playerPosition = new Vector2f(playerPosition.X - speed, playerPosition.Y);
             }
