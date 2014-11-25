@@ -37,7 +37,7 @@ namespace _2D_Projekt
         {
             Texture playerTexture = new Texture("pictures/player.png");
             playerSprite = new Sprite(playerTexture);
-            playerPosition = new Vector2f(400, 400);
+            playerPosition = new Vector2f(375, 275);
             playerSprite.Position = playerPosition;
             playerSprite.Scale = new Vector2f(0.8f, 0.8f);
 

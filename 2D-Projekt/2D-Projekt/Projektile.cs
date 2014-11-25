@@ -19,7 +19,7 @@ namespace _2D_Projekt
         Vector2f position;
         Vector2f sPosition;
         // Texture, Scale of Texture and width and height
-        private Sprite projektSprite = new Sprite(new Texture("pictures/bull.png"));
+        private Sprite projektSprite;
 
         // Ende der Variablen
         //================================================================================================
@@ -56,10 +56,12 @@ namespace _2D_Projekt
             float n = (float)Math.Sqrt(direction.X * direction.X + direction.Y * direction.Y);
             direction = new Vector2f(direction.X / n, direction.Y / n);
             // Standartstuff
+            projektSprite = new Sprite(new Texture("pictures/bulle.png"));
             projektSprite.Position = position;
             projektSprite.Scale = new Vector2f(1, 1);
             shotspeed = shotpeed;
             range = rang;
+ 
         }
 
 
@@ -70,7 +72,7 @@ namespace _2D_Projekt
         // Festlegen von Sprites Positionen und Skalierung
         public void ProjektileInilization(Vector2f _direction, Vector2f startPosition )
         {
-            
+            projektSprite = new Sprite(new Texture("pictures/bull.png"));
             position = startPosition;
             sPosition = startPosition;
             direction = _direction;

@@ -59,7 +59,7 @@ namespace _2D_Projekt
 
         // Enemy Stuff
         static List<dynamic> enemyList;
-        static int[,] enemies = {{1,200,300}};
+        static int[,] enemies = {{8,250,300}};
 
 
         static int FireRateCounter = 0;
@@ -83,7 +83,7 @@ namespace _2D_Projekt
         static void initialize()
         {
             player = new Player();
-            map = new Map(1); 
+            map = new Map(5); 
             playerProjektileList = new List<Projektile>();
             enemyList = new List<dynamic>();
             powerup = new List<PowerUp>();
