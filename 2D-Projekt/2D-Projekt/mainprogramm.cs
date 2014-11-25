@@ -86,7 +86,7 @@ namespace _2D_Projekt
         static void initialize()
         {
             player = new Player();
-            map = new Map(1);
+            map = new Map(1); 
             playerProjektileList = new List<Projektile>();
             enemyList = new List<dynamic>();
             powerup = new List<PowerUp>();
@@ -387,7 +387,7 @@ namespace _2D_Projekt
         {
 
             // Wahl einer Zufälligen Map für das nächste Level 
-            int mapvoting = Rnd.Next(1, 4);
+            int mapvoting = Rnd.Next(1, 11);
             map = new Map(mapvoting);
 
            

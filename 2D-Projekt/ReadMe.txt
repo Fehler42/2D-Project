@@ -9,7 +9,10 @@ neue Gegnertypen :
 	tower ( schießt von einer Position auf den Spieler) /done
 enemys verschwinden wenn sie am start von links auf dich treffen /fixed
 manchmal kann man nach powerUp nicht mehr schießen
+ungültige Gegnerkombinationen auf neuen Maps müssen ausgeschlossen werden bzw. erst Mapauswahl
+und dann nur bestimmte Gegner zulassen. (besonders Map 2,6,7,10)
 
 
 
 Hier werden erfüllte TODOs eingetragen:
+neue Maps wurden hinzugefügt
