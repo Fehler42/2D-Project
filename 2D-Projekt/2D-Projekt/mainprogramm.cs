@@ -21,8 +21,12 @@ namespace _2D_Projekt
             win.Draw(new Sprite(new Texture("pictures/startscreen.png")));
             win.Display();
             // Startscreen 
+            win.Draw(new Sprite(new Texture("pictures/startscreen.png")));
+            win.Display();
+
                 while (!(Keyboard.IsKeyPressed(Keyboard.Key.Space)))
                 {
+
                     win.DispatchEvents();
                 }
 
@@ -55,10 +59,11 @@ namespace _2D_Projekt
 
         // Enemy Stuff
         static List<dynamic> enemyList;
-        static int[,] enemies = { {3,100,200}
-                                , {4,200,300},
+        static int[,] enemies = { {3,100,200},
+                                  {4,200,300},
                                   {3,600,550},
                                   {7,200,300}};
+
 
         static int FireRateCounter = 0;
         // Enemy Projektilliste
@@ -81,7 +86,7 @@ namespace _2D_Projekt
         static void initialize()
         {
             player = new Player();
-            map = new Map(1);
+            map = new Map(1); 
             playerProjektileList = new List<Projektile>();
             enemyList = new List<dynamic>();
             powerup = new List<PowerUp>();
@@ -112,11 +117,11 @@ namespace _2D_Projekt
 
             for (int i = 0; i < enemies.GetLength(0); i++)
             {
-                if (enemies[i,0] == 1)
+                if (enemies[i, 0] == 1)
                 {
-                    enemyList.Add(new FollowerE(enemies[i,1],enemies[i,2]));
+                    enemyList.Add(new FollowerE(enemies[i, 1], enemies[i, 2]));
                 }
-                if (enemies[i,0] == 2)
+                if (enemies[i, 0] == 2)
                 {
                     enemyList.Add(new Charger(enemies[i, 1], enemies[i, 2]));
                 }
@@ -128,16 +133,23 @@ namespace _2D_Projekt
                 {
                     enemyList.Add(new Turret(enemies[i, 1], enemies[i, 2]));
                 }
-                if (enemies[i, 0] == 6)
-                {
-                    enemyList.Add(new Bouncer(enemies[i, 1], enemies[i, 2]));
-                }
-                if (enemies[i, 0] == 7)
-                {
-                    enemyList.Add(new TurretBouncer(enemies[i, 1], enemies[i, 2]));
-                }
-            }
 
+                if (enemies[i, 0] == 5)
+                {
+                    enemyList.Add(new flyingTurret(enemies[i, 1], enemies[i, 2]));
+                }
+                    if (enemies[i, 0] == 6)
+                    {
+                        enemyList.Add(new Bouncer(enemies[i, 1], enemies[i, 2]));
+                    }
+                    if (enemies[i, 0] == 7)
+                    {
+                        enemyList.Add(new TurretBouncer(enemies[i, 1], enemies[i, 2]));
+
+                    }
+                
+
+            }
         }
 
 
@@ -150,7 +162,7 @@ namespace _2D_Projekt
         static void update( RenderWindow win)
         {
             // Überprüfung Tod des Spielers
-            if (player.life == 0)
+            if (player.life <= 0)
             {
                 deadPlayer(win);
             }
@@ -191,8 +203,17 @@ namespace _2D_Projekt
                    }
                }
 
+
+            // Kollisionsabfrage mit Lebensverlust
+
+
+          
+
+            // mit Treffern
+
             //============================================================================
             // Untersucht Kollision mit Gegnern in der Gegnerliste. sorgt für kurze Schutzzeit nach Treffern
+
 
            for (int i = 0; i < enemyList.Count; i++)
 
@@ -205,9 +226,22 @@ namespace _2D_Projekt
            }
            player.protectedTime--;
 
+
+
+
+
+           
+
+
+            // Projektil mit Gegnerkontakt entfernen von Feinden 
+
+            // Projektil mit Gegnerkontakt, Feind schaden und entfernen von Feinden 
+
+
             //============================================================================================
             // Untersucht Kollision zwischen den Projektilen des Spielers und Gegnern. Zieht ggf. Gegnerleben ab oder entfernt diese
-           for (int i = 0; i < playerProjektileList.Count; i++)
+
+         for (int i = 0; i < playerProjektileList.Count; i++)
            {
                    for (int k = enemyList.Count - 1; k >= 0; k--)
                    {
@@ -353,7 +387,7 @@ namespace _2D_Projekt
         {
 
             // Wahl einer Zufälligen Map für das nächste Level 
-            int mapvoting = Rnd.Next(1, 4);
+            int mapvoting = Rnd.Next(1, 11);
             map = new Map(mapvoting);
 
            
@@ -424,6 +458,7 @@ namespace _2D_Projekt
  * neue Liste unter if Abfrage mit erhöhtem enemyvoting
  * int enemyvoting = Rnd.Next(1, X); X ein höher als das höchste Enemyvoting setzen
 ******************************************************************/
+
 
 /**********************************************************************
  * Leitfaden zur Gegnererstellung:
@@ -502,3 +537,4 @@ namespace _2D_Projekt
  * 
  * sich über den Feind freuen XD
 **********************************************************************/
+
