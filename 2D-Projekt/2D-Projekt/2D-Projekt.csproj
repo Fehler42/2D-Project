@@ -121,6 +121,9 @@
     <Content Include="pictures\Gras.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="pictures\Gras2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="pictures\ground.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
