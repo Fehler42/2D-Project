@@ -59,7 +59,7 @@ namespace _2D_Projekt
 
         // Enemy Stuff
         static List<dynamic> enemyList;
-        static int[,] enemies = {{8,250,300}};
+        static int[,] enemies = {{1,250,300}};
 
 
         static int FireRateCounter = 0;
@@ -394,7 +394,12 @@ namespace _2D_Projekt
            
 
             // Enemies für das nächste Level (Erklärung am Ende)
-            int enemyvoting = Rnd.Next(1, 5);
+            int enemyvoting = Rnd.Next(1, 9);
+            int bossfight = 0;
+            bossfight ++;
+            if(bossfight == 10)
+                enemyvoting =7;
+
 
             if(enemyvoting==1)
             enemies = new int[,] { { 1, 100, 450 }, { 1, 350, 450 }, { 1, 400, 450 }, { 1, 700, 450 }, { 1, 100, 300 }, { 1, 650, 300 }, { 1, 100, 250 }, { 1, 650, 250 }, { 1, 100, 100 }, { 1, 350, 100 }, { 1, 400, 100 }, { 1, 650, 100 } };
@@ -402,8 +407,17 @@ namespace _2D_Projekt
             enemies = new int[,] { { 1, 100, 200 }, { 1, 200, 300 }, { 2, 600, 550 }, { 2, 300, 500 } };
             if(enemyvoting==3)
             enemies = new int[,] { { 2, 100, 100 }, { 2, 650, 100 }, { 2, 100, 450 }, { 2, 650, 450 } };
-            if (enemyvoting == 4 && mapvoting != 2)
-            enemies = new int[,] { { 4, 200, 300 }, { 4, 550, 300 }, { 3, 425, 100 }, { 3, 425, 500 } };
+            if(enemyvoting == 4 && mapvoting != 2)
+            enemies = new int[,] { { 4, 200, 300 }, { 4, 650, 300 }, { 3, 425, 100 }, { 3, 425, 500 } };
+            if(enemyvoting == 5)
+            enemies = new int[,] { { 5, 100, 450 }, { 3, 650, 100 }, { 3, 550, 300 }, { 2, 200, 300 } };
+            if (enemyvoting == 6)
+            enemies = new int[,] { { 7, 600, 550 }, { 6, 200, 300 } };
+            if (enemyvoting == 7)
+            enemies = new int[,] { { 8, 425, 425 } };
+            if (enemyvoting == 8)
+            enemies = new int[,] { { 1, 100, 450 }, { 2, 350, 450 }, { 3, 425, 100 }, { 6, 200, 300 } };
+
             // variable für das n#chste PowerUp
             powerupKind = Rnd.Next(1, 6);
             // Laden der Gegner
