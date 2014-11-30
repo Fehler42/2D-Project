@@ -32,7 +32,7 @@ namespace _2D_Projekt
         {
                 if (Keyboard.IsKeyPressed(Keyboard.Key.W))
                 {
-                    ProjektileInilization(new Vector2f(0, -1), new Vector2f(player.playerPosition.X + 0.5f * player.getWidth(), player.playerPosition.Y));
+                    ProjektileInilization(new Vector2f(0, -1), new Vector2f(player.playerPosition.X , player.playerPosition.Y));
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.A))
                 {
@@ -40,11 +40,11 @@ namespace _2D_Projekt
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.S))
                 {
-                    ProjektileInilization(new Vector2f(0, 1), new Vector2f(player.playerPosition.X + 0.5f * player.getWidth(), player.playerPosition.Y + 0.5f * player.getHeight()));
+                    ProjektileInilization(new Vector2f(0, 1), new Vector2f(player.playerPosition.X , player.playerPosition.Y ));
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.D))
                 {
-                    ProjektileInilization(new Vector2f(1, 0), new Vector2f(player.playerPosition.X + 0.5f * player.getWidth(), player.playerPosition.Y));
+                    ProjektileInilization(new Vector2f(1, 0), new Vector2f(player.playerPosition.X, player.playerPosition.Y));
                 }
             }
         public Projektile(Vector2f _direction, Vector2f startPosition, int shotpeed , int rang)
@@ -101,7 +101,7 @@ namespace _2D_Projekt
             Vector2f wallCollisionTest = new Vector2f(position.X + (direction.X * speed), position.Y + (direction.Y * speed));
 
             // Überprüft ob an der zukünftigen Stelle Platz vorhanden ist 
-            bool freeWay = map.isWalkable((int)wallCollisionTest.X /50,(int) wallCollisionTest.Y/50);
+            bool freeWay = map.isWalkable((int)wallCollisionTest.X /50,(int)( wallCollisionTest.Y+20 )/50);
 
             // setzt das Projektil falls es sich innerhalb der Reichweite des Players befindet und der Weg frei ist in seine Richtung weiter oder entfernt es ggf. aus der Liste
             if (Math.Abs(sPosition.X - position.X) + Math.Abs(sPosition.Y - position.Y) < Range && freeWay)
