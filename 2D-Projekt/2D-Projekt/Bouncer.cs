@@ -19,7 +19,7 @@ namespace _2D_Projekt
 
         int shotspeed = 1;
         int range = 200;
-        int speed = 10;
+        int speed = 5;
 
 
         // Ende der Funktion

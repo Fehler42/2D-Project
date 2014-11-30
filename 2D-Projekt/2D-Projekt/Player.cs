@@ -24,7 +24,7 @@ namespace _2D_Projekt
 
         // Variablen für Lebensanzeige
         public int life = 3;
-        Sprite heart = new Sprite(new Texture("pictures/Herz3.jpg"));
+        Sprite heart = new Sprite(new Texture("pictures/Herz2.png"));
         public int protectedTime = 20;
 
         // Ende der Variablen
@@ -39,7 +39,6 @@ namespace _2D_Projekt
             playerPosition = new Vector2f(375, 275);
             playerSprite.Position = playerPosition;
             playerSprite.Scale = new Vector2f(0.8f, 0.8f);
-
         }
 
         // Ende der Funktion
@@ -61,6 +60,7 @@ namespace _2D_Projekt
         //Zeichnen von lifes Herzen 
         public void drawHearts(RenderWindow win)
         {
+            heart.Scale = new Vector2f(0.5f, 0.5f);
             heart.Position = new Vector2f(0, 0);
             for (int i = 0; i < this.life; i++)
             {
@@ -135,6 +135,10 @@ namespace _2D_Projekt
             // Aktualisierung der Spriteposition
 
             playerSprite.Position = playerPosition;
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Right))
+                playerSprite.TextureRect = new IntRect(50, 0, -50, 50);
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Left))
+                playerSprite.TextureRect = new IntRect(0, 0, 50, 50);
 
         }
 

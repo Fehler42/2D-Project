@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using SFML.Window;
 using SFML.Graphics;
 
-
 namespace _2D_Projekt
 {
     class mainprogramm
@@ -14,19 +13,38 @@ namespace _2D_Projekt
         static void Main(string[] args)
         {
             // Erzeuge ein neues Fenster
-            RenderWindow win = new RenderWindow(new VideoMode(800, 600), "Mein erstes Fenster");
+            RenderWindow win = new RenderWindow(new VideoMode(800, 600), "Magic Meadow");
             win.SetFramerateLimit(45);
             // Achte darauf, ob Fenster geschlossen wird
             win.Closed += win_Closed;
-            win.Draw(new Sprite(new Texture("pictures/Titelbildschirm.jpg")));
             win.Display();
             // Startscreen 
-            win.Draw(new Sprite(new Texture("pictures/Titelbildschirm.jpg")));
+            Sprite start = new Sprite(new Texture("pictures/Titelbildschirm.jpg"));
+            Sprite start2 = new Sprite(new Texture("pictures/Titelbildschirm02.jpg"));
+            win.Draw(start);
             win.Display();
+            Boolean start1 = true;
+            GameTime time = new GameTime();
+            time.start();
 
                 while (!(Keyboard.IsKeyPressed(Keyboard.Key.Space)))
                 {
-
+                    time.update();
+                    if (time.TotalTime.Milliseconds == 600 && start1 == true) {
+                        start1 = false;
+                        win.Draw(start2);
+                        time.stop();
+                        time.start();
+                    win.Display();
+                }
+                    else if (time.TotalTime.Milliseconds == 600 && start1 == false)
+                    {
+                        start1 = true;
+                        win.Draw(start);
+                        time.stop();
+                        time.start();
+                        win.Display();
+                    }
                     win.DispatchEvents();
                 }
 
@@ -59,7 +77,10 @@ namespace _2D_Projekt
 
         // Enemy Stuff
         static List<dynamic> enemyList;
-        static int[,] enemies = {{8,250,300}};
+        static int[,] enemies = {{1,250,300}};
+        static bool firstBoss = true;
+        static int bossfight = 0;
+       
 
 
         static int FireRateCounter = 0;
@@ -286,6 +307,10 @@ namespace _2D_Projekt
                {
                    player.life--;
                    enemyProjektilList.RemoveAt(i);
+                   if (player.life <= 0)
+                   {
+                       deadPlayer(win);
+                   }
                }
            }
 
@@ -394,7 +419,18 @@ namespace _2D_Projekt
            
 
             // Enemies für das nächste Level (Erklärung am Ende)
-            int enemyvoting = Rnd.Next(1, 5);
+            int enemyvoting = Rnd.Next(1, 9);
+            if (bossfight == 10)
+            {
+                enemyvoting = 9;
+                bossfight = 0;
+                if (firstBoss == false)
+                {
+                    enemies = new int[,] { { 8, 425, 425 }, { 8, 400, 200 } };
+                }
+            }
+
+
 
             if(enemyvoting==1)
             enemies = new int[,] { { 1, 100, 450 }, { 1, 350, 450 }, { 1, 400, 450 }, { 1, 700, 450 }, { 1, 100, 300 }, { 1, 650, 300 }, { 1, 100, 250 }, { 1, 650, 250 }, { 1, 100, 100 }, { 1, 350, 100 }, { 1, 400, 100 }, { 1, 650, 100 } };
@@ -402,14 +438,29 @@ namespace _2D_Projekt
             enemies = new int[,] { { 1, 100, 200 }, { 1, 200, 300 }, { 2, 600, 550 }, { 2, 300, 500 } };
             if(enemyvoting==3)
             enemies = new int[,] { { 2, 100, 100 }, { 2, 650, 100 }, { 2, 100, 450 }, { 2, 650, 450 } };
-            if (enemyvoting == 4 && mapvoting != 2)
-            enemies = new int[,] { { 4, 200, 300 }, { 4, 550, 300 }, { 3, 425, 100 }, { 3, 425, 500 } };
+            if(enemyvoting == 4)
+            enemies = new int[,] { { 4, 200, 325 }, { 4, 650, 325 }, { 3, 425, 75 }, { 3, 425, 500 } };
+            if(enemyvoting == 5)
+            enemies = new int[,] { { 5, 100, 450 }, { 3, 650, 75 }, { 3, 550, 300 }, { 2, 200, 300 } };
+            if (enemyvoting == 6)
+            enemies = new int[,] { { 7, 650, 300 }, { 6, 100, 200 } };
+            if (enemyvoting == 7)
+            enemies = new int[,] { { 1, 100, 450 }, { 2, 350, 450 }, { 3, 425, 100 }, { 6, 200, 300 } };
+            if (enemyvoting == 8)
+                enemies = new int[,] { { 6, 400, 450 }, { 6, 100, 450 } };
+            if (enemyvoting == 9 && firstBoss == true)
+            {
+                enemies = new int[,] { { 8, 425, 425 } };
+                firstBoss = false;
+            }
+
             // variable für das n#chste PowerUp
             powerupKind = Rnd.Next(1, 6);
             // Laden der Gegner
             loadContent();
             // erlaubt Loot zu nehmen 
             LootTaken = false;
+            bossfight++;
 
         }
         // Ende der Funktion
@@ -417,8 +468,13 @@ namespace _2D_Projekt
         //================================================================================================
         static void deadPlayer(RenderWindow win)
         {
-            win.Draw(new Sprite(new Texture("pictures/RipBildschirm.jpg")));
+            GameTime time = new GameTime();
+            Boolean end1 = true;
+            Sprite end = new Sprite(new Texture("pictures/RipBildschirm.jpg"));
+            Sprite end2 = new Sprite(new Texture("pictures/RipBildschirm02.jpg"));
+            win.Draw(end);
             win.Display();
+            time.start();
             while (player.life == 0)
             {
                 win.DispatchEvents();
@@ -427,12 +483,27 @@ namespace _2D_Projekt
                 {
                     player.life = 3;
                     initialize();
+                    enemies = new int[,] { { 1, 250, 300 } };
                     loadContent();
+                    bossfight = 0;
                 }
-                while (Keyboard.IsKeyPressed(Keyboard.Key.Space))
-                {
-
-                }
+                    time.update();
+                    if (time.TotalTime.Milliseconds == 600 && end1 == true)
+                    {
+                        end1 = false;
+                        win.Draw(end);
+                        time.stop();
+                        time.start();
+                        win.Display();
+                    }
+                    else if (time.TotalTime.Milliseconds == 600 && end1 == false)
+                    {
+                        end1 = true;
+                        win.Draw(end2);
+                        time.stop();
+                        time.start();
+                        win.Display();
+                    }
             }
         }
         // Ende der Funktion
