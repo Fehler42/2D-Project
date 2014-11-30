@@ -13,7 +13,6 @@ namespace _2D_Projekt
         // Klassenvariablen
         Sprite playerSprite;
         public Vector2f playerPosition;
-        int ueberStandCounter = 0;
 
         // Wichtige public Variablen für den  Player . In Kommentaren befinden sich passable Standartwerte
 
@@ -25,7 +24,7 @@ namespace _2D_Projekt
 
         // Variablen für Lebensanzeige
         public int life = 3;
-        Sprite heart = new Sprite(new Texture("pictures/heart.png"));
+        Sprite heart = new Sprite(new Texture("pictures/Herz3.jpg"));
         public int protectedTime = 20;
 
         // Ende der Variablen

@@ -254,11 +254,11 @@ namespace _2D_Projekt
                 {
                     if (tileKind[i, j] == 0)
                     {
-                        mapTiles[i, j] = new Tile(true, "pictures/free.png", new Vector2f((float)(50 * i), (float)(50 * j)));
+                        mapTiles[i, j] = new Tile(true, "pictures/Gras.jpg", new Vector2f((float)(50 * i), (float)(50 * j)));
                     }
                     else
                     {
-                        mapTiles[i, j] = new Tile(true, "pictures/ground.png", new Vector2f((float)(50 * i), (float)(50 * j)));
+                        mapTiles[i, j] = new Tile(true, "pictures/Tree.jpg", new Vector2f((float)(50 * i), (float)(50 * j)));
                     }
                 }
             }

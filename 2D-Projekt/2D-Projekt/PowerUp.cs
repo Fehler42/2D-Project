@@ -36,15 +36,15 @@ namespace _2D_Projekt
             }
             if (i == 2)
             {
-                upSprite = new Sprite(new Texture("pictures/heart.png"));
+                upSprite = new Sprite(new Texture("pictures/Herz2.png"));
             }
             if (i == 3)
             {
-                upSprite = new Sprite(new Texture("pictures/Speed.png"));
+                upSprite = new Sprite(new Texture("pictures/speedUp.png"));
             }
             if( i == 4)
             {
-                upSprite = new Sprite(new Texture("pictures/ShotSpeed.png"));
+                upSprite = new Sprite(new Texture("pictures/Shotspeed.png"));
             }
             if (i == 5)
             {
