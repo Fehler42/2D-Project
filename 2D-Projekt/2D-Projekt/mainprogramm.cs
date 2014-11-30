@@ -60,6 +60,7 @@ namespace _2D_Projekt
         // Enemy Stuff
         static List<dynamic> enemyList;
         static int[,] enemies = {{1,250,300}};
+       
 
 
         static int FireRateCounter = 0;
@@ -412,7 +413,7 @@ namespace _2D_Projekt
             if(enemyvoting == 5)
             enemies = new int[,] { { 5, 100, 450 }, { 3, 650, 100 }, { 3, 550, 300 }, { 2, 200, 300 } };
             if (enemyvoting == 6)
-            enemies = new int[,] { { 7, 600, 550 }, { 6, 200, 300 } };
+            enemies = new int[,] { { 7, 650, 300 }, { 6, 100, 200 } };
             if (enemyvoting == 7)
             enemies = new int[,] { { 8, 425, 425 } };
             if (enemyvoting == 8)
