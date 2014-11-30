@@ -32,19 +32,19 @@ namespace _2D_Projekt
         {
                 if (Keyboard.IsKeyPressed(Keyboard.Key.W))
                 {
-                    ProjektileInilization(new Vector2f(0, -1), new Vector2f(player.playerPosition.X , player.playerPosition.Y));
+                    ProjektileInilization(new Vector2f(0, -1), new Vector2f(player.playerPosition.X , player.playerPosition.Y+13));
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.A))
                 {
-                    ProjektileInilization(new Vector2f(-1, 0), new Vector2f(player.playerPosition.X, player.playerPosition.Y ));
+                    ProjektileInilization(new Vector2f(-1, 0), new Vector2f(player.playerPosition.X, player.playerPosition.Y+13 ));
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.S))
                 {
-                    ProjektileInilization(new Vector2f(0, 1), new Vector2f(player.playerPosition.X , player.playerPosition.Y ));
+                    ProjektileInilization(new Vector2f(0, 1), new Vector2f(player.playerPosition.X , player.playerPosition.Y +13));
                 }
                 if (Keyboard.IsKeyPressed(Keyboard.Key.D))
                 {
-                    ProjektileInilization(new Vector2f(1, 0), new Vector2f(player.playerPosition.X, player.playerPosition.Y));
+                    ProjektileInilization(new Vector2f(1, 0), new Vector2f(player.playerPosition.X, player.playerPosition.Y+13));
                 }
             }
         public Projektile(Vector2f _direction, Vector2f startPosition, int shotpeed , int rang)

@@ -19,9 +19,9 @@ namespace _2D_Projekt
         bool chargeCheck = false;
 
 
-        int shotspeed = 5;
-        int range = 400;
-        int speed = 5;
+        public int shotspeed = 5;
+        public int range = 400;
+        public int speed = 5;
 
 
         // Ende der Funktion
