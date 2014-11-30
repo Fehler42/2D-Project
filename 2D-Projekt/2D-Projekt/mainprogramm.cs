@@ -394,7 +394,7 @@ namespace _2D_Projekt
            
 
             // Enemies für das nächste Level (Erklärung am Ende)
-            int enemyvoting = Rnd.Next(1, 9);
+            int enemyvoting = Rnd.Next(1, 10);
             int bossfight = 0;
             bossfight ++;
             if(bossfight == 10)
@@ -417,6 +417,8 @@ namespace _2D_Projekt
             enemies = new int[,] { { 8, 425, 425 } };
             if (enemyvoting == 8)
             enemies = new int[,] { { 1, 100, 450 }, { 2, 350, 450 }, { 3, 425, 100 }, { 6, 200, 300 } };
+            if (enemyvoting == 9)
+                enemies = new int[,] { { 6, 400, 450 }, { 6, 100, 450 } };
 
             // variable für das n#chste PowerUp
             powerupKind = Rnd.Next(1, 6);
